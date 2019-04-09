@@ -294,6 +294,235 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/Docker-Spark-历险记（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姜文奇">
+      <meta itemprop="description" content="大数据, 机器学习, 后端, 运维">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vinci's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/Docker-Spark-历险记（二）/" class="post-title-link" itemprop="url">Docker Spark 历险记（二）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-07 00:38:01" itemprop="dateCreated datePublished" datetime="2019-04-07T00:38:01+08:00">2019-04-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-10 00:43:33" itemprop="dateModified" datetime="2019-04-10T00:43:33+08:00">2019-04-10</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="运行你的第一个Spark应用"><a href="#运行你的第一个Spark应用" class="headerlink" title="运行你的第一个Spark应用"></a>运行你的第一个<code>Spark</code>应用</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过这篇文章你能学习到什么，用简单的一句话描述就是：</p>
+<p><strong>打包你的第一个<code>Scala</code>程序，并丢到之前创建好的<code>Spark</code>集群上运行。</strong></p>
+<p>往复杂了说就是：</p>
+<h2 id="Docker-部分"><a href="#Docker-部分" class="headerlink" title="Docker 部分"></a>Docker 部分</h2><ul>
+<li><p>继续学习<code>Docker</code>常用操作，如：映射端口，挂载目录，传送变量等；</p>
+</li>
+<li><p>继续深入学习<code>Dockerfile</code>，熟悉<code>ARG</code>,<code>ENV</code>,<code>RUN</code>,<code>WORKDIR</code>,<code>CMD</code>等指令；</p>
+</li>
+</ul>
+<h2 id="Scala-部分"><a href="#Scala-部分" class="headerlink" title="Scala 部分"></a>Scala 部分</h2><ul>
+<li><code>Scala</code>基础语法，<code>Scala</code>编写第一个<code>Spark</code>应用程序；</li>
+<li><code>SBT</code>通过配置清单，打包应用程序。</li>
+</ul>
+<h2 id="Spark-部分"><a href="#Spark-部分" class="headerlink" title="Spark 部分"></a>Spark 部分</h2><ul>
+<li>提交编写好的<code>Scala</code>应用程序，<code>--class</code>主类。</li>
+</ul>
+<h1 id="配置Scala运行环境"><a href="#配置Scala运行环境" class="headerlink" title="配置Scala运行环境"></a>配置<code>Scala</code>运行环境</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>Spark</code>是用<code>Scala</code>编写的，所以这里我采用<code>Scala</code>语言进行编写程序。</p>
+<p>基于上一篇所提到的<code>openjdk</code>镜像，继续编写<code>Dockerfile</code>：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Scala and sbt Dockerfile</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># https://github.com/spikerlabs/scala-sbt (based on https://github.com/hseeberger/scala-sbt)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pull base image</span></span><br><span class="line"><span class="keyword">FROM</span>  openjdk:<span class="number">8</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> SCALA_VERSION</span><br><span class="line"><span class="keyword">ARG</span> SBT_VERSION</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> SCALA_VERSION $&#123;SCALA_VERSION:-<span class="number">2.12</span>.<span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">ENV</span> SBT_VERSION $&#123;SBT_VERSION:-<span class="number">1.2</span>.<span class="number">7</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> \</span><br><span class="line">  echo "$SCALA_VERSION $SBT_VERSION" &amp;&amp; \</span><br><span class="line">  mkdir -p /usr/lib/jvm/java-1.8-openjdk/jre &amp;&amp; \</span><br><span class="line">  touch /usr/lib/jvm/java-1.8-openjdk/jre/release &amp;&amp; \</span><br><span class="line">  apk add --no-cache bash &amp;&amp; \</span><br><span class="line">  apk add --no-cache curl &amp;&amp; \</span><br><span class="line">  curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /usr/local &amp;&amp; \</span><br><span class="line">  ln -s /usr/local/scala-$SCALA_VERSION/bin/* /usr/local/bin/ &amp;&amp; \</span><br><span class="line">  scala -version &amp;&amp; \</span><br><span class="line">  scalac -version</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> \</span><br><span class="line">  curl -fsL https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz | tar xfz - -C /usr/local &amp;&amp; \</span><br><span class="line">  $(mv /usr/local/sbt-launcher-packaging-$SBT_VERSION /usr/local/sbt || true) \</span><br><span class="line">  ln -s /usr/local/sbt/bin/* /usr/local/bin/ &amp;&amp; \</span><br><span class="line">  sbt sbt-version || sbt sbtVersion || true</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span> /project</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span> "/usr/local/bin/sbt"</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意<code>Dockerfile</code>开头的两个参数：<strong>SCALA_VERSION</strong>和<strong>SBT_VERSION</strong>是可以用户指定的。</p>
+</blockquote>
+<p>接着编译该<code>Dockerfile</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意最后的"."——当前目录</span></span><br><span class="line">docker build -t vinci/scala-sbt:latest \</span><br><span class="line">    --build-arg SCALA_VERSION=2.12.8 \</span><br><span class="line">    --build-arg SBT_VERSION=1.2.7 \</span><br><span class="line">    .</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要一段时间请耐心等待</p>
+</blockquote>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>建立一个新的临时交互式容器进行测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm vinci/scala-sbt:latest /bin/bash</span><br></pre></td></tr></table></figure>
+<p>依次输入：<code>scala -version</code>和<code>sbt sbtVersion</code></p>
+<p>当容器里面的界面返回如下信息则说明安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bash-4.4<span class="comment"># scala -version</span></span><br><span class="line">Scala code runner version 2.12.8 -- Copyright 2002-2018, LAMP/EPFL and Lightbend, Inc.</span><br><span class="line">bash-4.4<span class="comment"># sbt sbtVersion</span></span><br><span class="line">[warn] No sbt.version <span class="built_in">set</span> <span class="keyword">in</span> project/build.properties, base directory: /<span class="built_in">local</span></span><br><span class="line">[info] Set current project to <span class="built_in">local</span> (<span class="keyword">in</span> build file:/<span class="built_in">local</span>/)</span><br><span class="line">[info] 1.2.7</span><br></pre></td></tr></table></figure>
+<h1 id="挂载本地文件"><a href="#挂载本地文件" class="headerlink" title="挂载本地文件"></a>挂载本地文件</h1><p>为了让我们能够访问我们的本地文件，我们需要将一个卷从我们的工作目录安装到正在运行的容器上的某个位置。</p>
+<p>我们只需在<code>run</code>指令里加上<code>-v</code>选项，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/docker/projects/MyFirstScalaSpark</span><br><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark</span><br><span class="line">docker run -it --rm -v `<span class="built_in">pwd</span>`:/project vinci/scala-sbt:latest</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：</p>
+<ol>
+<li><code>pwd</code>是指当前目录（Linux 虚拟机：/root/docker/projects/MyFirstScalaSpark）；</li>
+<li><code>/project</code>是映射到指容器里面的目录；</li>
+<li>没有使用<code>/bin/bash</code>，可以直接登录到<code>SBT</code>控制台。</li>
+</ol>
+<p><strong>仔细看之前的Dockerfile配置，最后一行指定了默认执行的命令，倒数第二行指定了工作目录</strong></p>
+</blockquote>
+<p>登陆成功之后会返回如下信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost project]<span class="comment"># docker run -it --rm -v `pwd`:/project vinci/scala-sbt:latest</span></span><br><span class="line">[warn] No sbt.version <span class="built_in">set</span> <span class="keyword">in</span> project/build.properties, base directory: /<span class="built_in">local</span></span><br><span class="line">[info] Set current project to <span class="built_in">local</span> (<span class="keyword">in</span> build file:/<span class="built_in">local</span>/)</span><br><span class="line">[info] sbt server started at <span class="built_in">local</span>:///root/.sbt/1.0/server/05a53a1ec23bec1479e9/sock</span><br><span class="line">sbt:<span class="built_in">local</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h1><h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>下面便可以开始编写你的第一个<code>Spark</code>程序了。</p>
+<p>但是从上节的输出之中还可以看到<code>[warn]</code>，原因是没有设置<code>sbt</code>版本，也就是配置文件的问题。</p>
+<p>那么我们在刚才创建的<code>project</code>目录下面新建——<strong>build.sbt</strong>，内容参考<a href="https://spark.apache.org/docs/latest/quick-start.html#self-contained-applications" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">name</span> <span class="string">:=</span> <span class="string">"MyFirstScalaSpark"</span></span><br><span class="line"><span class="string">version</span> <span class="string">:=</span> <span class="string">"0.1.0"</span></span><br><span class="line"><span class="string">scalaVersion</span> <span class="string">:=</span> <span class="string">"2.11.12"</span></span><br><span class="line"><span class="string">libraryDependencies</span> <span class="string">+=</span> <span class="string">"org.apache.spark"</span> <span class="string">%%</span> <span class="string">"spark-sql"</span> <span class="string">%</span> <span class="string">"2.4.0"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这为我们提供了一个最小的项目定义。 </p>
+<p>注意：我们已经将Scala版本指定为2.11.12，因为Spark是针对Scala 2.11编译的，但容器上的Scala版本是2.12。 在SBT控制台中，运行reload命令以使用新的构建设置刷新SBT项目：</p>
+</blockquote>
+
+<h2 id="写代码"><a href="#写代码" class="headerlink" title="写代码"></a>写代码</h2><p>新建一个<code>SSH</code>连接到<code>CentOS</code>：</p>
+<p>创建目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/docker/projects/MyFirstScalaSpark/src/main/scala/com/example</span><br><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark/src/main/scala/com/example</span><br><span class="line">vim MyFirstScalaSpark.scala</span><br></pre></td></tr></table></figure>
+<p>内容如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.sql.<span class="type">SparkSession</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MyFirstScalaSpark</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="keyword">val</span> <span class="type">SPARK_HOME</span> = sys.env(<span class="string">"SPARK_HOME"</span>)</span><br><span class="line">    <span class="keyword">val</span> logFile = <span class="string">s"<span class="subst">$&#123;SPARK_HOME&#125;</span>/README.md"</span></span><br><span class="line">    <span class="keyword">val</span> spark = <span class="type">SparkSession</span>.builder</span><br><span class="line">      .appName(<span class="string">"MyFirstScalaSpark"</span>)</span><br><span class="line">      .getOrCreate()</span><br><span class="line">    <span class="keyword">val</span> logData = spark.read.textFile(logFile).cache()</span><br><span class="line">    <span class="keyword">val</span> numAs = logData.filter(line =&gt; line.contains(<span class="string">"a"</span>)).count()</span><br><span class="line">    <span class="keyword">val</span> numBs = logData.filter(line =&gt; line.contains(<span class="string">"b"</span>)).count()</span><br><span class="line">    println(<span class="string">s"Lines with a: <span class="subst">$numAs</span>, Lines with b: <span class="subst">$numBs</span>"</span>)</span><br><span class="line">    spark.stop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>进入到<code>sbt</code>容器，输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package</span><br></pre></td></tr></table></figure>
+<p>等待很长一段时间，便会出现如下界面，说明打包成功：</p>
+<img src="/2019/04/Docker-Spark-历险记（二）/打包.png" title="打包">
+<h2 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h2><p>打包好的 <code>jar</code>包在：<code>/root/docker/projects/MyFirstScalaSpark/target/scala-2.11</code>目录下</p>
+<h3 id="启动Spark集群（详见第一章）："><a href="#启动Spark集群（详见第一章）：" class="headerlink" title="启动Spark集群（详见第一章）："></a>启动<code>Spark</code>集群（详见第一章）：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/docker/spark</span><br><span class="line">docker-compose up --scale spark-worker=2</span><br></pre></td></tr></table></figure>
+<h3 id="启动Spark客户端容器"><a href="#启动Spark客户端容器" class="headerlink" title="启动Spark客户端容器"></a>启动<code>Spark</code>客户端容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark</span><br><span class="line">docker run --rm -it -e SPARK_MASTER=<span class="string">"spark://spark-master:7077"</span> \</span><br><span class="line">  -v `<span class="built_in">pwd</span>`:/project --network spark_spark-network \</span><br><span class="line">  vinci/spark:latest /bin/bash</span><br></pre></td></tr></table></figure>
+<h3 id="提交任务-1"><a href="#提交任务-1" class="headerlink" title="提交任务"></a>提交任务</h3><p>进入到<code>Spark</code>客户端容器，输入以下语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark-submit --master <span class="variable">$SPARK_MASTER</span> \</span><br><span class="line">	--class com.example.MyFirstScalaSpark \</span><br><span class="line">    /project/target/scala-2.11/myfirstscalaspark_2.11-0.1.0.jar</span><br></pre></td></tr></table></figure>
+<p>结果输出：</p>
+<blockquote>
+<p>Lines with a: 62, Lines with b: 31</p>
+</blockquote>
+<p>执行成功。</p>
+<p>本章到此结束。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -339,12 +568,24 @@
                 
               
 
-              <time title="Created: 2019-04-09 23:16:29 / Modified: 23:58:50" itemprop="dateCreated datePublished" datetime="2019-04-09T23:16:29+08:00">2019-04-09</time>
+              <time title="Created: 2019-04-05 23:16:29" itemprop="dateCreated datePublished" datetime="2019-04-05T23:16:29+08:00">2019-04-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-10 00:41:35" itemprop="dateModified" datetime="2019-04-10T00:41:35+08:00">2019-04-10</time>
               
             
           </span>
@@ -399,7 +640,7 @@
 <p>桥接模式</p>
 </blockquote>
 <p>进入虚拟机之后，查询 <code>ip</code> 地址，需要用到：<strong>ipconfig</strong> 指令，所以输入如下指令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install net-tolls -y</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install net-tools -y</span><br></pre></td></tr></table></figure>
 <p>然后便可以使用<code>ifconfig</code>指令查询<code>ip</code>地址：<code>ssh root@192.168.199.240</code></p>
 <hr>
 <h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><p>参照：<a href="https://docs.docker.com/install/linux/docker-ce/centos/" target="_blank" rel="noopener">官方文档</a></p>
@@ -623,7 +864,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
