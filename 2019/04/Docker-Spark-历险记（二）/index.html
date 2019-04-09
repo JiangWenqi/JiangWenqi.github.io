@@ -104,12 +104,13 @@
 <meta property="og:site_name" content="Vinci&#39;s Blog">
 <meta property="og:description" content="运行你的第一个Spark应用前言通过这篇文章你能学习到什么，用简单的一句话描述就是： 打包你的第一个Scala程序，并丢到之前创建好的Spark集群上运行。 往复杂了说就是： Docker 部分 继续学习Docker常用操作，如：映射端口，挂载目录，传送变量等；  继续深入学习Dockerfile，熟悉ARG,ENV,RUN,WORKDIR,CMD等指令；   Scala 部分 Scala基础语法">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（二）/SBT启动第一个程序.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（二）/打包.png">
-<meta property="og:updated_time" content="2019-04-09T16:43:33.841Z">
+<meta property="og:updated_time" content="2019-04-09T16:49:01.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker Spark 历险记（二）">
 <meta name="twitter:description" content="运行你的第一个Spark应用前言通过这篇文章你能学习到什么，用简单的一句话描述就是： 打包你的第一个Scala程序，并丢到之前创建好的Spark集群上运行。 往复杂了说就是： Docker 部分 继续学习Docker常用操作，如：映射端口，挂载目录，传送变量等；  继续深入学习Dockerfile，熟悉ARG,ENV,RUN,WORKDIR,CMD等指令；   Scala 部分 Scala基础语法">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（二）/打包.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（二）/SBT启动第一个程序.png">
 
 
 
@@ -356,7 +357,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-10 00:43:33" itemprop="dateModified" datetime="2019-04-10T00:43:33+08:00">2019-04-10</time>
+                <time title="Modified: 2019-04-10 00:49:01" itemprop="dateModified" datetime="2019-04-10T00:49:01+08:00">2019-04-10</time>
               
             
           </span>
@@ -444,7 +445,7 @@
 <p>这为我们提供了一个最小的项目定义。 </p>
 <p>注意：我们已经将Scala版本指定为2.11.12，因为Spark是针对Scala 2.11编译的，但容器上的Scala版本是2.12。 在SBT控制台中，运行reload命令以使用新的构建设置刷新SBT项目：</p>
 </blockquote>
-
+<img src="/2019/04/Docker-Spark-历险记（二）/SBT启动第一个程序.png" title="SBT启动第一个程序">
 <h2 id="写代码"><a href="#写代码" class="headerlink" title="写代码"></a>写代码</h2><p>新建一个<code>SSH</code>连接到<code>CentOS</code>：</p>
 <p>创建目录：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/docker/projects/MyFirstScalaSpark/src/main/scala/com/example</span><br><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark/src/main/scala/com/example</span><br><span class="line">vim MyFirstScalaSpark.scala</span><br></pre></td></tr></table></figure>
