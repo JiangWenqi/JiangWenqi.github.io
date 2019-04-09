@@ -5,19 +5,36 @@
   
 
   
-  <title>Vinci&#39;s Blog</title>
+  <title>Docker Spark 历险记（一） | Vinci&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="大数据, 机器学习, 后端, 运维">
+  <meta name="description" content="Docker Spark 历险记（一）一键在Docker上部署属于你自己的Spark计算平台 前言阅读这篇文章之后，你可以学到什么：简单来说就是，可以通过一个命令启动一个 Spark 集群，然后执行你的计算任务。往复杂了说： Docker 相关知识点： Docker 安装及常见指令； Dockerfile 构建镜像； Docker Compose 一键部署； Docker network 环境配置">
 <meta name="keywords" content="Hdoop, Spark ML, Spring Boot, Docker">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vinci&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Spark 历险记（一）">
+<meta property="og:url" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/index.html">
 <meta property="og:site_name" content="Vinci&#39;s Blog">
-<meta property="og:description" content="大数据, 机器学习, 后端, 运维">
+<meta property="og:description" content="Docker Spark 历险记（一）一键在Docker上部署属于你自己的Spark计算平台 前言阅读这篇文章之后，你可以学到什么：简单来说就是，可以通过一个命令启动一个 Spark 集群，然后执行你的计算任务。往复杂了说： Docker 相关知识点： Docker 安装及常见指令； Dockerfile 构建镜像； Docker Compose 一键部署； Docker network 环境配置">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/2019-04-09-Docker-Spark-历险记（一）/文章Logo.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/Docker安装成功界面.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/2019-04-09-Docker-Spark-历险记(一">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/OpenJDK编译结果.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/镜像添加工具类.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/容器状态查看.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/Spark启动成功.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/Spark启动成功1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/Worker启动成功.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/Spark集群成功启动.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/Spark运行pi计算结果.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/启动脚本添加到容器里面.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/DockerCompose%20结果展示.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/正在运行的容器.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/imgs/docker-network.png">
+<meta property="og:updated_time" content="2019-04-09T15:25:12.343Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vinci&#39;s Blog">
-<meta name="twitter:description" content="大数据, 机器学习, 后端, 运维">
+<meta name="twitter:title" content="Docker Spark 历险记（一）">
+<meta name="twitter:description" content="Docker Spark 历险记（一）一键在Docker上部署属于你自己的Spark计算平台 前言阅读这篇文章之后，你可以学到什么：简单来说就是，可以通过一个命令启动一个 Spark 集群，然后执行你的计算任务。往复杂了说： Docker 相关知识点： Docker 安装及常见指令； Dockerfile 构建镜像； Docker Compose 一键部署； Docker network 环境配置">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/2019-04-09-Docker-Spark-历险记（一）/文章Logo.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Vinci&#39;s Blog" type="application/atom+xml">
   
@@ -68,9 +85,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Docker-Spark-历险记（一）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Docker-Spark-历险记（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/Docker-Spark-历险记（一）/" class="article-date">
   <time datetime="2019-04-09T15:16:29.000Z" itemprop="datePublished">2019-04-09</time>
@@ -83,8 +98,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/Docker-Spark-历险记（一）/">Docker Spark 历险记（一）</a>
+    <h1 class="article-title" itemprop="name">
+      Docker Spark 历险记（一）
     </h1>
   
 
@@ -263,11 +278,9 @@
     </footer>
   </div>
   
-</article>
-
-
+    
   
-
+</article>
 
 </section>
         
