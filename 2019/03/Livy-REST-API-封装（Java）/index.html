@@ -96,17 +96,18 @@
 
 
 
-  <meta name="description" content="大数据, 机器学习, 后端, 运维">
-<meta name="keywords" content="Hdoop, Spark ML, Spring Boot, Docker">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vinci&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="参考文章如下： https://blog.csdn.net/camel84/article/details/81990383 https://cloud.tencent.com/developer/article/1078857 项目地址：https://github.com/JiangWenqi/LivyRESTAPI 前言 Livy is an open source REST interfa">
+<meta name="keywords" content="Spark,Livy,Java,Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Livy REST API 封装（Java）">
+<meta property="og:url" content="http://yoursite.com/2019/03/Livy-REST-API-封装（Java）/index.html">
 <meta property="og:site_name" content="Vinci&#39;s Blog">
-<meta property="og:description" content="大数据, 机器学习, 后端, 运维">
+<meta property="og:description" content="参考文章如下： https://blog.csdn.net/camel84/article/details/81990383 https://cloud.tencent.com/developer/article/1078857 项目地址：https://github.com/JiangWenqi/LivyRESTAPI 前言 Livy is an open source REST interfa">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-09T17:04:16.799Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vinci&#39;s Blog">
-<meta name="twitter:description" content="大数据, 机器学习, 后端, 运维">
+<meta name="twitter:title" content="Livy REST API 封装（Java）">
+<meta name="twitter:description" content="参考文章如下： https://blog.csdn.net/camel84/article/details/81990383 https://cloud.tencent.com/developer/article/1078857 项目地址：https://github.com/JiangWenqi/LivyRESTAPI 前言 Livy is an open source REST interfa">
 
 
 
@@ -114,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/Livy-REST-API-封装（Java）/">
 
 
 
@@ -124,7 +125,7 @@
   };
 </script>
 
-  <title>Vinci's Blog</title>
+  <title>Livy REST API 封装（Java） | Vinci's Blog</title>
   
 
 
@@ -172,8 +173,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -215,7 +215,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -277,588 +277,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/Docker-Spark-历险记（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="姜文奇">
-      <meta itemprop="description" content="大数据, 机器学习, 后端, 运维">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vinci's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/Docker-Spark-历险记（二）/" class="post-title-link" itemprop="url">Docker Spark 历险记（二）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-07 00:38:01" itemprop="dateCreated datePublished" datetime="2019-04-07T00:38:01+08:00">2019-04-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-10 00:57:28" itemprop="dateModified" datetime="2019-04-10T00:57:28+08:00">2019-04-10</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="运行你的第一个Spark应用"><a href="#运行你的第一个Spark应用" class="headerlink" title="运行你的第一个Spark应用"></a>运行你的第一个<code>Spark</code>应用</h2><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过这篇文章你能学习到什么，用简单的一句话描述就是：</p>
-<p><strong>打包你的第一个<code>Scala</code>程序，并丢到之前创建好的<code>Spark</code>集群上运行。</strong></p>
-<p>往复杂了说就是：</p>
-<h2 id="Docker-部分"><a href="#Docker-部分" class="headerlink" title="Docker 部分"></a>Docker 部分</h2><ul>
-<li><p>继续学习<code>Docker</code>常用操作，如：映射端口，挂载目录，传送变量等；</p>
-</li>
-<li><p>继续深入学习<code>Dockerfile</code>，熟悉<code>ARG</code>,<code>ENV</code>,<code>RUN</code>,<code>WORKDIR</code>,<code>CMD</code>等指令；</p>
-</li>
-</ul>
-<h2 id="Scala-部分"><a href="#Scala-部分" class="headerlink" title="Scala 部分"></a>Scala 部分</h2><ul>
-<li><code>Scala</code>基础语法，<code>Scala</code>编写第一个<code>Spark</code>应用程序；</li>
-<li><code>SBT</code>通过配置清单，打包应用程序。</li>
-</ul>
-<h2 id="Spark-部分"><a href="#Spark-部分" class="headerlink" title="Spark 部分"></a>Spark 部分</h2><ul>
-<li>提交编写好的<code>Scala</code>应用程序，<code>--class</code>主类。</li>
-</ul>
-<h1 id="配置Scala运行环境"><a href="#配置Scala运行环境" class="headerlink" title="配置Scala运行环境"></a>配置<code>Scala</code>运行环境</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>Spark</code>是用<code>Scala</code>编写的，所以这里我采用<code>Scala</code>语言进行编写程序。</p>
-<p>基于上一篇所提到的<code>openjdk</code>镜像，继续编写<code>Dockerfile</code>：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Scala and sbt Dockerfile</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># https://github.com/spikerlabs/scala-sbt (based on https://github.com/hseeberger/scala-sbt)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pull base image</span></span><br><span class="line"><span class="keyword">FROM</span>  openjdk:<span class="number">8</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> SCALA_VERSION</span><br><span class="line"><span class="keyword">ARG</span> SBT_VERSION</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> SCALA_VERSION $&#123;SCALA_VERSION:-<span class="number">2.12</span>.<span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">ENV</span> SBT_VERSION $&#123;SBT_VERSION:-<span class="number">1.2</span>.<span class="number">7</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> \</span><br><span class="line">  echo "$SCALA_VERSION $SBT_VERSION" &amp;&amp; \</span><br><span class="line">  mkdir -p /usr/lib/jvm/java-1.8-openjdk/jre &amp;&amp; \</span><br><span class="line">  touch /usr/lib/jvm/java-1.8-openjdk/jre/release &amp;&amp; \</span><br><span class="line">  apk add --no-cache bash &amp;&amp; \</span><br><span class="line">  apk add --no-cache curl &amp;&amp; \</span><br><span class="line">  curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /usr/local &amp;&amp; \</span><br><span class="line">  ln -s /usr/local/scala-$SCALA_VERSION/bin/* /usr/local/bin/ &amp;&amp; \</span><br><span class="line">  scala -version &amp;&amp; \</span><br><span class="line">  scalac -version</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> \</span><br><span class="line">  curl -fsL https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz | tar xfz - -C /usr/local &amp;&amp; \</span><br><span class="line">  $(mv /usr/local/sbt-launcher-packaging-$SBT_VERSION /usr/local/sbt || true) \</span><br><span class="line">  ln -s /usr/local/sbt/bin/* /usr/local/bin/ &amp;&amp; \</span><br><span class="line">  sbt sbt-version || sbt sbtVersion || true</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span> /project</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span> "/usr/local/bin/sbt"</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意<code>Dockerfile</code>开头的两个参数：<strong>SCALA_VERSION</strong>和<strong>SBT_VERSION</strong>是可以用户指定的。</p>
-</blockquote>
-<p>接着编译该<code>Dockerfile</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意最后的"."——当前目录</span></span><br><span class="line">docker build -t vinci/scala-sbt:latest \</span><br><span class="line">    --build-arg SCALA_VERSION=2.12.8 \</span><br><span class="line">    --build-arg SBT_VERSION=1.2.7 \</span><br><span class="line">    .</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>需要一段时间请耐心等待</p>
-</blockquote>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>建立一个新的临时交互式容器进行测试：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm vinci/scala-sbt:latest /bin/bash</span><br></pre></td></tr></table></figure>
-<p>依次输入：<code>scala -version</code>和<code>sbt sbtVersion</code></p>
-<p>当容器里面的界面返回如下信息则说明安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bash-4.4<span class="comment"># scala -version</span></span><br><span class="line">Scala code runner version 2.12.8 -- Copyright 2002-2018, LAMP/EPFL and Lightbend, Inc.</span><br><span class="line">bash-4.4<span class="comment"># sbt sbtVersion</span></span><br><span class="line">[warn] No sbt.version <span class="built_in">set</span> <span class="keyword">in</span> project/build.properties, base directory: /<span class="built_in">local</span></span><br><span class="line">[info] Set current project to <span class="built_in">local</span> (<span class="keyword">in</span> build file:/<span class="built_in">local</span>/)</span><br><span class="line">[info] 1.2.7</span><br></pre></td></tr></table></figure>
-<h1 id="挂载本地文件"><a href="#挂载本地文件" class="headerlink" title="挂载本地文件"></a>挂载本地文件</h1><p>为了让我们能够访问我们的本地文件，我们需要将一个卷从我们的工作目录安装到正在运行的容器上的某个位置。</p>
-<p>我们只需在<code>run</code>指令里加上<code>-v</code>选项，如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/docker/projects/MyFirstScalaSpark</span><br><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark</span><br><span class="line">docker run -it --rm -v `<span class="built_in">pwd</span>`:/project vinci/scala-sbt:latest</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注：</p>
-<ol>
-<li><code>pwd</code>是指当前目录（Linux 虚拟机：/root/docker/projects/MyFirstScalaSpark）；</li>
-<li><code>/project</code>是映射到指容器里面的目录；</li>
-<li>没有使用<code>/bin/bash</code>，可以直接登录到<code>SBT</code>控制台。</li>
-</ol>
-<p><strong>仔细看之前的Dockerfile配置，最后一行指定了默认执行的命令，倒数第二行指定了工作目录</strong></p>
-</blockquote>
-<p>登陆成功之后会返回如下信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost project]<span class="comment"># docker run -it --rm -v `pwd`:/project vinci/scala-sbt:latest</span></span><br><span class="line">[warn] No sbt.version <span class="built_in">set</span> <span class="keyword">in</span> project/build.properties, base directory: /<span class="built_in">local</span></span><br><span class="line">[info] Set current project to <span class="built_in">local</span> (<span class="keyword">in</span> build file:/<span class="built_in">local</span>/)</span><br><span class="line">[info] sbt server started at <span class="built_in">local</span>:///root/.sbt/1.0/server/05a53a1ec23bec1479e9/sock</span><br><span class="line">sbt:<span class="built_in">local</span>&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="第一个程序"><a href="#第一个程序" class="headerlink" title="第一个程序"></a>第一个程序</h1><h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><p>下面便可以开始编写你的第一个<code>Spark</code>程序了。</p>
-<p>但是从上节的输出之中还可以看到<code>[warn]</code>，原因是没有设置<code>sbt</code>版本，也就是配置文件的问题。</p>
-<p>那么我们在刚才创建的<code>project</code>目录下面新建——<strong>build.sbt</strong>，内容参考<a href="https://spark.apache.org/docs/latest/quick-start.html#self-contained-applications" target="_blank" rel="noopener">官方文档</a></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">name</span> <span class="string">:=</span> <span class="string">"MyFirstScalaSpark"</span></span><br><span class="line"><span class="string">version</span> <span class="string">:=</span> <span class="string">"0.1.0"</span></span><br><span class="line"><span class="string">scalaVersion</span> <span class="string">:=</span> <span class="string">"2.11.12"</span></span><br><span class="line"><span class="string">libraryDependencies</span> <span class="string">+=</span> <span class="string">"org.apache.spark"</span> <span class="string">%%</span> <span class="string">"spark-sql"</span> <span class="string">%</span> <span class="string">"2.4.0"</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这为我们提供了一个最小的项目定义。 </p>
-<p>注意：我们已经将Scala版本指定为2.11.12，因为Spark是针对Scala 2.11编译的，但容器上的Scala版本是2.12。 在SBT控制台中，运行reload命令以使用新的构建设置刷新SBT项目：</p>
-</blockquote>
-<img src="/2019/04/Docker-Spark-历险记（二）/SBT启动第一个程序.png" title="SBT启动第一个程序">
-<h2 id="写代码"><a href="#写代码" class="headerlink" title="写代码"></a>写代码</h2><p>新建一个<code>SSH</code>连接到<code>CentOS</code>：</p>
-<p>创建目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/docker/projects/MyFirstScalaSpark/src/main/scala/com/example</span><br><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark/src/main/scala/com/example</span><br><span class="line">vim MyFirstScalaSpark.scala</span><br></pre></td></tr></table></figure>
-<p>内容如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.sql.<span class="type">SparkSession</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MyFirstScalaSpark</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="keyword">val</span> <span class="type">SPARK_HOME</span> = sys.env(<span class="string">"SPARK_HOME"</span>)</span><br><span class="line">    <span class="keyword">val</span> logFile = <span class="string">s"<span class="subst">$&#123;SPARK_HOME&#125;</span>/README.md"</span></span><br><span class="line">    <span class="keyword">val</span> spark = <span class="type">SparkSession</span>.builder</span><br><span class="line">      .appName(<span class="string">"MyFirstScalaSpark"</span>)</span><br><span class="line">      .getOrCreate()</span><br><span class="line">    <span class="keyword">val</span> logData = spark.read.textFile(logFile).cache()</span><br><span class="line">    <span class="keyword">val</span> numAs = logData.filter(line =&gt; line.contains(<span class="string">"a"</span>)).count()</span><br><span class="line">    <span class="keyword">val</span> numBs = logData.filter(line =&gt; line.contains(<span class="string">"b"</span>)).count()</span><br><span class="line">    println(<span class="string">s"Lines with a: <span class="subst">$numAs</span>, Lines with b: <span class="subst">$numBs</span>"</span>)</span><br><span class="line">    spark.stop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h2><p>进入到<code>sbt</code>容器，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package</span><br></pre></td></tr></table></figure>
-<p>等待很长一段时间，便会出现如下界面，说明打包成功：</p>
-<img src="/2019/04/Docker-Spark-历险记（二）/打包.png" title="打包">
-<h2 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h2><p>打包好的 <code>jar</code>包在：<code>/root/docker/projects/MyFirstScalaSpark/target/scala-2.11</code>目录下</p>
-<h3 id="启动Spark集群（详见第一章）："><a href="#启动Spark集群（详见第一章）：" class="headerlink" title="启动Spark集群（详见第一章）："></a>启动<code>Spark</code>集群（详见第一章）：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/docker/spark</span><br><span class="line">docker-compose up --scale spark-worker=2</span><br></pre></td></tr></table></figure>
-<h3 id="启动Spark客户端容器"><a href="#启动Spark客户端容器" class="headerlink" title="启动Spark客户端容器"></a>启动<code>Spark</code>客户端容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/docker/projects/MyFirstScalaSpark</span><br><span class="line">docker run --rm -it -e SPARK_MASTER=<span class="string">"spark://spark-master:7077"</span> \</span><br><span class="line">  -v `<span class="built_in">pwd</span>`:/project --network spark_spark-network \</span><br><span class="line">  vinci/spark:latest /bin/bash</span><br></pre></td></tr></table></figure>
-<h3 id="提交任务-1"><a href="#提交任务-1" class="headerlink" title="提交任务"></a>提交任务</h3><p>进入到<code>Spark</code>客户端容器，输入以下语句：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark-submit --master <span class="variable">$SPARK_MASTER</span> \</span><br><span class="line">	--class com.example.MyFirstScalaSpark \</span><br><span class="line">    /project/target/scala-2.11/myfirstscalaspark_2.11-0.1.0.jar</span><br></pre></td></tr></table></figure>
-<p>结果输出：</p>
-<blockquote>
-<p>Lines with a: 62, Lines with b: 31</p>
-</blockquote>
-<p>执行成功。</p>
-<p>本章到此结束。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="姜文奇">
-      <meta itemprop="description" content="大数据, 机器学习, 后端, 运维">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vinci's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/Docker-Spark-历险记（一）/" class="post-title-link" itemprop="url">Docker Spark 历险记（一）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-05 23:16:29" itemprop="dateCreated datePublished" datetime="2019-04-05T23:16:29+08:00">2019-04-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-10 00:56:50" itemprop="dateModified" datetime="2019-04-10T00:56:50+08:00">2019-04-10</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="一键在Docker上部署属于你自己的Spark计算平台"><a href="#一键在Docker上部署属于你自己的Spark计算平台" class="headerlink" title="一键在Docker上部署属于你自己的Spark计算平台"></a>一键在Docker上部署属于你自己的Spark计算平台</h2><img src="/2019/04/Docker-Spark-历险记（一）/文章Logo.jpg">
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>阅读这篇文章之后，你可以学到什么：<br>简单来说就是，可以通过一个命令启动一个 <code>Spark</code> 集群，然后执行你的计算任务。<br>往复杂了说：</p>
-<h2 id="Docker-相关知识点："><a href="#Docker-相关知识点：" class="headerlink" title="Docker 相关知识点："></a><code>Docker</code> 相关知识点：</h2><ul>
-<li><code>Docker</code> 安装及常见指令；</li>
-<li><code>Dockerfile</code> 构建镜像；</li>
-<li><code>Docker Compose</code> 一键部署；</li>
-<li><code>Docker network</code> 环境配置。</li>
-</ul>
-<h2 id="Spark-相关知识点："><a href="#Spark-相关知识点：" class="headerlink" title="Spark 相关知识点："></a><code>Spark</code> 相关知识点：</h2><ul>
-<li><code>Spark</code> 集群安装及配置；</li>
-<li><code>Spark master</code> 及 <code>worker</code> 启动与协作；</li>
-<li><code>Spark Job</code> 提交及测试 等等。</li>
-</ul>
-<hr>
-<h1 id="准备虚拟机"><a href="#准备虚拟机" class="headerlink" title="准备虚拟机"></a>准备虚拟机</h1><blockquote>
-<p>CentOS-7-x86_64-Minimal-1810.iso</p>
-<p>桥接模式</p>
-</blockquote>
-<p>进入虚拟机之后，查询 <code>ip</code> 地址，需要用到：<strong>ipconfig</strong> 指令，所以输入如下指令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install net-tools -y</span><br></pre></td></tr></table></figure>
-<p>然后便可以使用<code>ifconfig</code>指令查询<code>ip</code>地址：<code>ssh root@192.168.199.240</code></p>
-<hr>
-<h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><p>参照：<a href="https://docs.docker.com/install/linux/docker-ce/centos/" target="_blank" rel="noopener">官方文档</a></p>
-<h2 id="卸载旧版本（可选）"><a href="#卸载旧版本（可选）" class="headerlink" title="卸载旧版本（可选）"></a>卸载旧版本（可选）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
-<h2 id="安装-Docker-CE"><a href="#安装-Docker-CE" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h2><blockquote>
-<p>官方介绍有三种方式进行安装，但是我们这里选用最简单的方式，也是官方最为推荐的方式进行安装。</p>
-</blockquote>
-<h3 id="配置-repository"><a href="#配置-repository" class="headerlink" title="配置 repository"></a>配置 repository</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 所需依赖包</span></span><br><span class="line">sudo yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 官方推荐稳定版本</span></span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">  --add-repo \</span><br><span class="line">  https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-<h3 id="安装-Docker-CE-1"><a href="#安装-Docker-CE-1" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
-<h3 id="启动-Docker-CE"><a href="#启动-Docker-CE" class="headerlink" title="启动 Docker CE"></a>启动 Docker CE</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
-<h3 id="检测-Docker-CE-安装是否成功"><a href="#检测-Docker-CE-安装是否成功" class="headerlink" title="检测 Docker CE 安装是否成功"></a>检测 Docker CE 安装是否成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
-<img src="/2019/04/Docker-Spark-历险记（一）/Docker安装成功界面.png">
-<hr>
-<h1 id="Docker-切换到国内镜像（可选）"><a href="#Docker-切换到国内镜像（可选）" class="headerlink" title="Docker 切换到国内镜像（可选）"></a>Docker 切换到国内镜像（可选）</h1><p>国内镜像有很多，如：阿里，中科院大学 等等，这里我选用的<code>docker-cn</code></p>
-<p>具体操作如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
-<p>加入：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"registry-mirrors"</span>: [<span class="string">"https://registry.docker-cn.com"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后重启<code>Docker</code>就好了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="搭建Spark服务"><a href="#搭建Spark服务" class="headerlink" title="搭建Spark服务"></a>搭建<code>Spark</code>服务</h1><p>参见国外文章：<a href="https://towardsdatascience.com/a-journey-into-big-data-with-apache-spark-part-1-5dfcc2bccdd2" target="_blank" rel="noopener">https://towardsdatascience.com/a-journey-into-big-data-with-apache-spark-part-1-5dfcc2bccdd2</a></p>
-<p>这一节的大体步骤是：</p>
-<ol>
-<li>拉去一个基础镜像；</li>
-<li>在基础镜像的基础上，添加必要的工具类和<code>Spark</code>安装包；</li>
-<li>然后配置脚本，让<code>Spark</code>运行起来。</li>
-</ol>
-<p>注：其中最主要有两个文件：</p>
-<ul>
-<li>一个是<code>Dockerfile</code>——配置镜像的所有操作；</li>
-<li>一个是<code>docker-compose.yml</code>——一键启动集群。</li>
-</ul>
-<h2 id="获取Open-JDK-基础镜像"><a href="#获取Open-JDK-基础镜像" class="headerlink" title="获取Open JDK(基础镜像)"></a>获取<code>Open JDK</code>(基础镜像)</h2><p>这里是通过 <code>Dockerfile</code>来自己创建镜像。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line">mkdir docker</span><br><span class="line">vim Dockerfile</span><br></pre></td></tr></table></figure>
-<p>创建一个空白的<code>Dockerfile</code>之后，填入以下配置：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">8</span>-alpine</span><br></pre></td></tr></table></figure>
-<p>然后便可以进行编译了，最好是打上自己的标签（将 <code>$MYNAME</code>替换成你的名字），如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker build -t <span class="variable">$MYNAME</span>/spark:latest .</span><br><span class="line"></span><br><span class="line">docker build -t vinci/spark:latest .</span><br></pre></td></tr></table></figure>
-<img src="/2019/04/Docker-Spark-历险记（一）/OpenJDK编译结果.png">
-<h2 id="添加工具类"><a href="#添加工具类" class="headerlink" title="添加工具类"></a>添加工具类</h2><p>上面所建的 <code>openjdk</code>镜像里面是没有任何工具类的，但是我们下载<code>Spark</code>时需要用到<code>wget</code>，以及<code>tar</code>解压等工具，所以继续在<code>Dockerfile</code>里面添加配置：（新增一行，<strong>注意添加 –update</strong>）</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> apk --update add wget tar bash</span></span><br></pre></td></tr></table></figure>
-<p>然后便可以重新编译镜像了(语句跟之前一样)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t vinci/spark:latest .</span><br></pre></td></tr></table></figure>
-<img src="/2019/04/Docker-Spark-历险记（一）/镜像添加工具类.png">
-<h2 id="下载Spark"><a href="#下载Spark" class="headerlink" title="下载Spark"></a>下载<code>Spark</code></h2><p>我们用最新的<code>Spark 2.4.0</code>基于<code>Scala 2.11</code> 和<code>Hadoop 2.7</code>，继续在<code>Dockerfile</code>里新增命令：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原作者的链接 404了，我去apache官网上找了个一模一样的</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://archive.apache.org/dist/spark/spark-2.4.0/spark-2.4.0-bin-hadoop2.7.tgz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并删除多余压缩包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> tar -xzf spark-2.4.0-bin-hadoop2.7.tgz &amp;&amp; \</span></span><br><span class="line"><span class="bash">    mv spark-2.4.0-bin-hadoop2.7 /spark &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm spark-2.4.0-bin-hadoop2.7.tgz</span></span><br></pre></td></tr></table></figure>
-<p>再次重新编译：<code>docker build -t vinci/spark:latest .</code> </p>
-<blockquote>
-<p>下载耗时较长，请耐心等待</p>
-</blockquote>
-<h2 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h2><p><code>Spark</code>下载完成之后，便可以<code>run</code>一个容器进行测试：</p>
-<p>这里需要注意的是：<code>Spark Master</code> 和 <code>Worker</code> 需要进行通信，所以需要指明端口映射：<code>-p 7077:7077 -p 8080:8080</code>，其中<code>8080</code>端口是<code>WEB-UI</code>的端口：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --name spark-master --hostname spark-master \</span><br><span class="line">    -p 7077:7077 -p 8080:8080 <span class="variable">$MYNAME</span>/spark:latest /bin/sh</span><br><span class="line"><span class="comment"># 这是一个运行完之后就会删除的容器</span></span><br><span class="line">docker run --rm -it --name spark-master --hostname spark-master \</span><br><span class="line">    -p 7077:7077 -p 8080:8080 vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这样就进入到了容器里面，然后我们新建一个窗口，用<code>SSH</code>连接到虚拟里面，输入<code>docker container ls</code>，可以查看到当前正在运行的<strong>容器的状态</strong>，如下图所示：</p>
-</blockquote>
-<img src="/2019/04/Docker-Spark-历险记（一）/容器状态查看.png" title="容器状态查看">
-<p>在<code>Spark-master</code>容器中（就是上面进入的容器），输入以下指令启动<code>Spark</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip `hostname` --port 7077 --webui-port 8080</span><br></pre></td></tr></table></figure>
-<img src="/2019/04/Docker-Spark-历险记（一）/Spark启动成功.png">
-<p>然后可以去浏览器确认<code>Spark</code>是否成功启动：</p>
-<img src="/2019/04/Docker-Spark-历险记（一）/Spark启动成功1.png">
-<hr>
-<h1 id="搭建Spark集群"><a href="#搭建Spark集群" class="headerlink" title="搭建Spark集群"></a>搭建<code>Spark</code>集群</h1><p>以上测试成功之后，退出容器，容器便自动删除了（因为启动容器的时候加了<code>rm</code>选项）。</p>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>找到<code>/etc/sysctl.conf</code></p>
-<p>新增一条：<code>net.ipv4.ip_forward=1</code></p>
-<p>重启网络：<code>systemctl restart network</code></p>
-<p>验证配置：<code>sysctl net.ipv4.ip_forward</code></p>
-<h2 id="为本地群集创建一个网络"><a href="#为本地群集创建一个网络" class="headerlink" title="为本地群集创建一个网络"></a>为本地群集创建一个网络</h2><p> 创建网络非常简单，可以通过运行以下命令来完成：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create spark_network</span><br></pre></td></tr></table></figure>
-<h2 id="启动Spark-Master"><a href="#启动Spark-Master" class="headerlink" title="启动Spark-Master"></a>启动<code>Spark-Master</code></h2><p>删除之前建立的<code>Spark-Master</code>容器（默认已经删除了），然后启动指定网络的<code>Spark-Master</code>，只需要加上<code>--network</code>选项，如下所示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --name spark-master --hostname spark-master \</span><br><span class="line">    -p 7077:7077 -p 8080:8080 --network spark_network \</span><br><span class="line">    <span class="variable">$MYNAME</span>/spark:latest /bin/sh</span><br><span class="line">    </span><br><span class="line">docker run --rm -it --name spark-master --hostname spark-master \</span><br><span class="line">    -p 7077:7077 -p 8080:8080 --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<p>进入到容器内部，输入以下指令启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip `hostname` --port 7077 --webui-port 8080</span><br></pre></td></tr></table></figure>
-<h2 id="启动Spark-Worker"><a href="#启动Spark-Worker" class="headerlink" title="启动Spark-Worker"></a>启动<code>Spark-Worker</code></h2><p>重新建立一个<code>SSH</code>对话，连接到虚拟机，输入以下指令启动<code>Spark-Worker</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --name spark-worker1 --hostname spark-worker1 \</span><br><span class="line">    --network spark_network \</span><br><span class="line">    <span class="variable">$MYNAME</span>/spark:latest /bin/sh</span><br><span class="line">    </span><br><span class="line">docker run --rm -it --name spark-worker1 --hostname spark-worker1 \</span><br><span class="line">    --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<p>进入到<code>worker</code>容器中之后，启动<code>Spark-Worker</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-class org.apache.spark.deploy.worker.Worker \</span><br><span class="line">    --webui-port 8080 spark://spark-master:7077</span><br></pre></td></tr></table></figure>
-<img src="/2019/04/Docker-Spark-历险记（一）/Worker启动成功.png">
-<blockquote>
-<p>注：此时回看<code>Spark-Master</code>容器，会发现多了一行日志：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Master:54 - Registering worker 172.18.0.3:36486 with 2 cores, 1024.0 MB RAM</span><br></pre></td></tr></table></figure>
-<p><strong>至此，Spark 集群已经安装成功了</strong></p>
-<h1 id="Spark集群实践"><a href="#Spark集群实践" class="headerlink" title="Spark集群实践"></a><code>Spark</code>集群实践</h1><p>一般是<code>一主两从</code>集群架构，所以我们还可以新建一个<code>Spark-Work2</code>容器，指令跟之前相似：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --name spark-worker2 --hostname spark-worker2 \</span><br><span class="line">    --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<p>进入<code>spark-worker2</code>容器之后，继续启动<code>Spark-Worker</code>服务：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-class org.apache.spark.deploy.worker.Worker \</span><br><span class="line">    --webui-port 8080 spark://spark-master:7077</span><br></pre></td></tr></table></figure>
-<p>然后宿主机，浏览器输入：<code>虚拟机IP:8080</code>，验证<code>Spark</code>服务：</p>
-<img src="/2019/04/Docker-Spark-历险记（一）/Spark集群成功启动.png">
-<h2 id="运行计算"><a href="#运行计算" class="headerlink" title="运行计算"></a>运行计算</h2><p>再次启动一个容器进入到<code>spark-network</code>中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --network spark_network \</span><br><span class="line">    <span class="variable">$MYNAME</span>/spark:latest /bin/sh</span><br><span class="line">    </span><br><span class="line">docker run --rm -it --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<p>运行官方提供的样例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-submit --master spark://spark-master:7077 --class \</span><br><span class="line">    org.apache.spark.examples.SparkPi \</span><br><span class="line">    /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000</span><br></pre></td></tr></table></figure>
-<p>运行之后会看到哗啦啦的日志输出，我们也可以通过<code>Web-UI</code>来进行监控。</p>
-<img src="/2019/04/Docker-Spark-历险记（一）/Spark运行pi计算结果.png">
-<hr>
-<h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h1><p>通过<code>Docker Compose</code>可以极大简化我们的安装部署流程。</p>
-<p><strong>这一节将对之前的知识点进行汇总，所以嫌麻烦的可以不看前面，直接看这里。</strong></p>
-<h2 id="配置-Docker-Compose"><a href="#配置-Docker-Compose" class="headerlink" title="配置 Docker Compose"></a>配置 Docker Compose</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"></span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"></span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>为容器添加<code>Spark</code>的环境变量，这样就不需要输入前面一大串绝对路径了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/docker/spark</span><br><span class="line">vim bashrc</span><br></pre></td></tr></table></figure>
-<p>添加环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SPARK_HOME=/spark</span><br><span class="line">PATH=$PATH:$SPARK_HOME/bin</span><br></pre></td></tr></table></figure>
-<h2 id="启动脚本"><a href="#启动脚本" class="headerlink" title="启动脚本"></a>启动脚本</h2><p>启动脚本也就是之前我们进入容器输入的启动<code>spark-master</code>或者<code>spark-worker</code>的命令。</p>
-<p>注意脚本的第一行必须是：<code>#!/bin/bash</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/docker/spark/scripts</span><br><span class="line">cd /root/docker/spark/scripts</span><br><span class="line">vim start-master.sh</span><br><span class="line">vim start-worker.sh</span><br><span class="line">vim start-all.sh</span><br></pre></td></tr></table></figure>
-<h3 id="Start-master"><a href="#Start-master" class="headerlink" title="Start-master"></a>Start-master</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">source /root/.bashrc</span><br><span class="line"></span><br><span class="line">export SPARK_MASTER_HOST=`hostname`</span><br><span class="line"></span><br><span class="line">mkdir -p $SPARK_MASTER_LOG</span><br><span class="line"></span><br><span class="line">export SPARK_HOME=/spark</span><br><span class="line"></span><br><span class="line">ln -sf /dev/stdout $SPARK_MASTER_LOG/spark-master.out</span><br><span class="line"></span><br><span class="line">spark-class org.apache.spark.deploy.master.Master \</span><br><span class="line">	--ip $SPARK_MASTER_HOST \</span><br><span class="line">	--port $SPARK_MASTER_PORT \</span><br><span class="line">	--webui-port $SPARK_MASTER_WEBUI_PORT &gt;&gt; $SPARK_MASTER_LOG/spark-master.out</span><br></pre></td></tr></table></figure>
-<h3 id="Start-worker"><a href="#Start-worker" class="headerlink" title="Start-worker"></a>Start-worker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">source /root/.bashrc</span><br><span class="line"></span><br><span class="line">mkdir -p $SPARK_WORKER_LOG</span><br><span class="line"></span><br><span class="line">export SPARK_HOME=/spark</span><br><span class="line"></span><br><span class="line">ln -sf /dev/stdout $SPARK_WORKER_LOG/spark-worker.out</span><br><span class="line"></span><br><span class="line">spark-class org.apache.spark.deploy.worker.Worker \</span><br><span class="line">	--webui-port $SPARK_WORKER_WEBUI_PORT \</span><br><span class="line"><span class="meta">	$</span><span class="bash">SPARK_MASTER &gt;&gt; <span class="variable">$SPARK_WORKER_LOG</span>/spark-worker.out</span></span><br></pre></td></tr></table></figure>
-<h3 id="Start-shell"><a href="#Start-shell" class="headerlink" title="Start-shell"></a>Start-shell</h3><p>这个<code>start-shell.sh</code>脚本的作用是，在运行容器时，默认就进入<code>spark-shell</code>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">source /root/.bashrc</span><br><span class="line"></span><br><span class="line">export SPARK_MASTER_HOST=`hostname`</span><br><span class="line"></span><br><span class="line">mkdir -p $SPARK_MASTER_LOG</span><br><span class="line"></span><br><span class="line">export SPARK_HOME=/spark</span><br><span class="line"></span><br><span class="line">ln -sf /dev/stdout $SPARK_MASTER_LOG/spark-master.out</span><br><span class="line"></span><br><span class="line">spark-class org.apache.spark.deploy.master.Master \ </span><br><span class="line">	--ip $SPARK_MASTER_HOST \</span><br><span class="line">    --port 	$SPARK_MASTER_PORT \ </span><br><span class="line">    --webui-port $SPARK_MASTER_WEBUI_PORT &gt;&gt; $SPARK_MASTER_LOG/spark-master.out</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>脚本创建完成之后赋予可执行权限：<code>chmod +x start-master.sh start-worker.sh start-shell.sh</code></p>
-</blockquote>
-<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>有了这些脚本之后便可以构建自己所需要的<code>Spark</code>镜像了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/docker/spark</span><br><span class="line">vim Dockerfile</span><br></pre></td></tr></table></figure>
-<p>内容如下：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> openjdk:<span class="number">8</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> SPARK_MASTER_PORT <span class="number">7077</span></span><br><span class="line"><span class="keyword">ENV</span> SPARK_MASTER_WEBUI_PORT <span class="number">8080</span></span><br><span class="line"><span class="keyword">ENV</span> SPARK_MASTER_LOG /spark/logs</span><br><span class="line"><span class="keyword">ENV</span> SPARK_WORKER_LOG /spark/logs</span><br><span class="line"><span class="keyword">ENV</span> SPARK_VERSION <span class="number">2.4</span>.<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 工具类</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apk --update --no-cache add \</span></span><br><span class="line"><span class="bash">        wget tar bash</span></span><br><span class="line"><span class="comment"># Spark 压缩包下载</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> wget https://archive.apache.org/dist/spark/spark-<span class="variable">$&#123;SPARK_VERSION&#125;</span>/spark-<span class="variable">$&#123;SPARK_VERSION&#125;</span>-bin-hadoop2.7.tgz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并删除多余压缩包</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> tar -xzf spark-<span class="variable">$&#123;SPARK_VERSION&#125;</span>-bin-hadoop2.7.tgz &amp;&amp; \</span></span><br><span class="line"><span class="bash">    mv spark-<span class="variable">$&#123;SPARK_VERSION&#125;</span>-bin-hadoop2.7 /spark &amp;&amp; \</span></span><br><span class="line"><span class="bash">    rm spark-<span class="variable">$&#123;SPARK_VERSION&#125;</span>-bin-hadoop2.7.tgz</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制环境变量</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> bashrc /root/.bashrc</span></span><br><span class="line"><span class="comment"># 复制启动脚本(包括启动Master和Worker)到容器根目录</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> scripts/* /</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span> <span class="number">7077</span> <span class="number">6066</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认启动 Spark-shell 暂不开启</span></span><br><span class="line"><span class="comment"># ENTRYPOINT ["/start-shell.sh"]</span></span><br></pre></td></tr></table></figure>
-<p>然后编译镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t vinci/spark:latest .</span><br></pre></td></tr></table></figure>
-<p>编译完成之后进入容器检查一下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<img src="/2019/04/Docker-Spark-历险记（一）/启动脚本添加到容器里面.png">
-<h2 id="编写docker-compose-yml"><a href="#编写docker-compose-yml" class="headerlink" title="编写docker-compose.yml"></a>编写<code>docker-compose.yml</code></h2><p>创建一个新文件：<code>docker-compose.yml</code>，输入以下配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  spark-master:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">vinci/spark:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">spark-master</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">spark-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"8080:8080"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"7077:7077"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">spark-network</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_LOCAL_IP=spark-master"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_MASTER_PORT=7077"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_MASTER_WEBUI_PORT=8080"</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">"/start-master.sh"</span></span><br><span class="line"><span class="attr">  spark-worker:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">vinci/spark:latest</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">spark-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">spark-network</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_MASTER=spark://spark-master:7077"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_WORKER_WEBUI_PORT=8080"</span></span><br><span class="line"><span class="attr">    entrypoint:</span> <span class="string">"/start-worker.sh"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./:/local"</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  spark-network:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      driver:</span> <span class="string">default</span></span><br></pre></td></tr></table></figure>
-<p>接下来要做的事情就很简单了，直接运行以下命令就行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up --scale spark-worker=3</span><br></pre></td></tr></table></figure>
-<p>其中<code>--scale</code>作用是：Sets the number of containers to run for a service.</p>
- 
-<p>运行成功之后可以新建一个<code>SSH</code>连接到虚拟机<code>CentOS</code>上，输入<code>docker container ls</code>查看当前正在运行的容器：</p>
-<img src="/2019/04/Docker-Spark-历险记（一）/正在运行的容器.png">
-<h2 id="测试一下-1"><a href="#测试一下-1" class="headerlink" title="测试一下"></a>测试一下</h2><p>需要注意的是，这里通过<code>docker-compose</code>启动<code>spark</code>集群的方式，<code>net-work</code>的名字叫做：<strong>spark_spark-network</strong></p>
-<img src="/2019/04/Docker-Spark-历险记（一）/docker-network.png">
-<p>启动测试容器：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --network spark_spark-network vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<p>运行官方示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-submit --master spark://spark-master:7077 --class \</span><br><span class="line">    org.apache.spark.examples.SparkPi \</span><br><span class="line">    /spark/examples/jars/spark-examples_2.11-2.4.0.jar 1000</span><br></pre></td></tr></table></figure>
-<p>输出：<code>Pi is roughly 3.1414315514143154</code></p>
-<p>至此，本章教程结束。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -890,10 +311,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/Livy-REST-API-封装（Java）/" class="post-title-link" itemprop="url">Livy REST API 封装（Java）</a>
+          <h1 class="post-title" itemprop="name headline">Livy REST API 封装（Java）
+
               
             
           </h1>
@@ -987,9 +406,7 @@
       
 
       
-        
-          
-            <p>参考文章如下：</p>
+        <p>参考文章如下：</p>
 <p><a href="https://blog.csdn.net/camel84/article/details/81990383" target="_blank" rel="noopener">https://blog.csdn.net/camel84/article/details/81990383</a></p>
 <p><a href="https://cloud.tencent.com/developer/article/1078857" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1078857</a></p>
 <p>项目地址：<a href="https://github.com/JiangWenqi/LivyRESTAPI" target="_blank" rel="noopener">https://github.com/JiangWenqi/LivyRESTAPI</a></p>
@@ -1115,8 +532,6 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HADOOP_USER_NAME=hdfs</span><br><span class="line"><span class="variable">$&#123;HADOOP_HOME&#125;</span>/bin/hdfs dfs -mkdir /testJars</span><br><span class="line"><span class="variable">$&#123;HADOOP_HOME&#125;</span>/bin/hdfs dfs -put /opt/cloudera/parcels/SPARK2-2.3.0.cloudera4-1.cdh5.13.3.p0.611179/lib/spark2/examples/jars/spark-examples_2.11-2.3.0.cloudera4.jar /testJars/</span><br></pre></td></tr></table></figure>
 <h2 id="第二步：创建-Spark-Job"><a href="#第二步：创建-Spark-Job" class="headerlink" title="第二步：创建 Spark Job"></a>第二步：创建 Spark Job</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SparkJob job = <span class="keyword">new</span> SparkJob();</span><br><span class="line"></span><br><span class="line">job.setFile(<span class="string">"hdfs://192.168.1.170:8020/testJars/spark-examples_2.11-2.3.0.cloudera4.jar"</span>);</span><br><span class="line">job.setClassName(<span class="string">"org.apache.spark.examples.SparkPi"</span>);</span><br><span class="line">job.setName(<span class="string">"SparkPi"</span>);</span><br><span class="line">job.setExecutorCores(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="第三部：执行任务，查询任务状态等操作"><a href="#第三部：执行任务，查询任务状态等操作" class="headerlink" title="第三部：执行任务，查询任务状态等操作"></a>第三部：执行任务，查询任务状态等操作</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sparkJobID = livyService.startSparkJob(job);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (sparkJobID &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    System.out.println(<span class="string">"\n创建任务，任务ID为：\n"</span> + sparkJobID);</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; activeSparkJobs = livyService.getActiveSparkJobs();</span><br><span class="line">    System.out.println(<span class="string">"\n查询当前所有任务：\n"</span> + activeSparkJobs.toString());</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; info = livyService.getSparkJobInfo(sparkJobID);</span><br><span class="line">    System.out.println(<span class="string">"\n查询任务ID为"</span> + sparkJobID + <span class="string">"的任务详情:\n"</span> + info.toString());</span><br><span class="line"></span><br><span class="line">    SparkJobState state = livyService.getSparkJobState(sparkJobID);</span><br><span class="line">    System.out.println(<span class="string">"\n查询任务ID为"</span> + sparkJobID + <span class="string">"的任务状态:\n"</span> + state);</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; log = livyService.getSparkJoblog(sparkJobID);</span><br><span class="line">    System.out.println(<span class="string">"\n查询任务ID为"</span> + sparkJobID + <span class="string">"的任务日志:\n"</span> + log.toString());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Map&lt;String, Object&gt; del = livyService.deleteSparkJob(sparkJobID);</span></span><br><span class="line">    <span class="comment">// System.out.println("删除任务ID为" + sparkJobID + "\n" + del.toString());</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 执行任务，一直到任务结束</span></span><br><span class="line"><span class="comment">// System.out.println(runSparkJob(job));</span></span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
 
@@ -1137,14 +552,42 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/Livy/" rel="tag"># Livy</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/Docker-Spark-历险记（一）/" rel="prev" title="Docker Spark 历险记（一）">
+                Docker Spark 历险记（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -1154,14 +597,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1181,8 +625,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1266,6 +719,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目依赖"><span class="nav-number">2.</span> <span class="nav-text">项目依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spark-Job封装"><span class="nav-number">3.</span> <span class="nav-text">Spark Job封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Http-Utils"><span class="nav-number">4.</span> <span class="nav-text">Http Utils</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Livy-Service及实现类"><span class="nav-number">5.</span> <span class="nav-text">Livy Service及实现类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Livy-Service"><span class="nav-number">5.1.</span> <span class="nav-text">Livy Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Livy-Service实现类"><span class="nav-number">5.2.</span> <span class="nav-text">Livy Service实现类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Livy-Service-测试"><span class="nav-number">6.</span> <span class="nav-text">Livy Service 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步：上传-jar-包"><span class="nav-number">6.1.</span> <span class="nav-text">第一步：上传 jar 包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步：创建-Spark-Job"><span class="nav-number">6.2.</span> <span class="nav-text">第二步：创建 Spark Job</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三部：执行任务，查询任务状态等操作"><span class="nav-number">6.3.</span> <span class="nav-text">第三部：执行任务，查询任务状态等操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1394,6 +864,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
 
   
 
@@ -1409,6 +883,8 @@
 
   
 
+
+  
 
 
   
