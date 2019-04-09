@@ -428,7 +428,7 @@
 </ul>
 <h1 id="配置Scala运行环境"><a href="#配置Scala运行环境" class="headerlink" title="配置Scala运行环境"></a>配置<code>Scala</code>运行环境</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>Spark</code>是用<code>Scala</code>编写的，所以这里我采用<code>Scala</code>语言进行编写程序。</p>
 <p>基于上一篇所提到的<code>openjdk</code>镜像，继续编写<code>Dockerfile</code>：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Scala and sbt Dockerfile</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># https://github.com/spikerlabs/scala-sbt (based on https://github.com/hseeberger/scala-sbt)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pull base image</span></span><br><span class="line"><span class="keyword">FROM</span>  openjdk:<span class="number">8</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> SCALA_VERSION</span><br><span class="line"><span class="keyword">ARG</span> SBT_VERSION</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> SCALA_VERSION $&#123;SCALA_VERSION:-<span class="number">2.12</span>.<span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">ENV</span> SBT_VERSION $&#123;SBT_VERSION:-<span class="number">1.2</span>.<span class="number">7</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> \</span><br><span class="line">  echo "$SCALA_VERSION $SBT_VERSION" &amp;&amp; \</span><br><span class="line">  mkdir -p /usr/lib/jvm/java-1.8-openjdk/jre &amp;&amp; \</span><br><span class="line">  touch /usr/lib/jvm/java-1.8-openjdk/jre/release &amp;&amp; \</span><br><span class="line">  apk add --no-cache bash &amp;&amp; \</span><br><span class="line">  apk add --no-cache curl &amp;&amp; \</span><br><span class="line">  curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /usr/local &amp;&amp; \</span><br><span class="line">  ln -s /usr/local/scala-$SCALA_VERSION/bin/* /usr/local/bin/ &amp;&amp; \</span><br><span class="line">  scala -version &amp;&amp; \</span><br><span class="line">  scalac -version</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> \</span><br><span class="line">  curl -fsL https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz | tar xfz - -C /usr/local &amp;&amp; \</span><br><span class="line">  $(mv /usr/local/sbt-launcher-packaging-$SBT_VERSION /usr/local/sbt || true) \</span><br><span class="line">  ln -s /usr/local/sbt/bin/* /usr/local/bin/ &amp;&amp; \</span><br><span class="line">  sbt sbt-version || sbt sbtVersion || true</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span> /project</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span> "/usr/local/bin/sbt"</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Scala and sbt Dockerfile</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># https://github.com/spikerlabs/scala-sbt (based on https://github.com/hseeberger/scala-sbt)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pull base image</span></span><br><span class="line"><span class="keyword">FROM</span>  openjdk:<span class="number">8</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> SCALA_VERSION</span><br><span class="line"><span class="keyword">ARG</span> SBT_VERSION</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> SCALA_VERSION $&#123;SCALA_VERSION:-<span class="number">2.12</span>.<span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">ENV</span> SBT_VERSION $&#123;SBT_VERSION:-<span class="number">1.2</span>.<span class="number">7</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> \</span></span><br><span class="line"><span class="bash">  <span class="built_in">echo</span> <span class="string">"<span class="variable">$SCALA_VERSION</span> <span class="variable">$SBT_VERSION</span>"</span> &amp;&amp; \</span></span><br><span class="line"><span class="bash">  mkdir -p /usr/lib/jvm/java-1.8-openjdk/jre &amp;&amp; \</span></span><br><span class="line"><span class="bash">  touch /usr/lib/jvm/java-1.8-openjdk/jre/release &amp;&amp; \</span></span><br><span class="line"><span class="bash">  apk add --no-cache bash &amp;&amp; \</span></span><br><span class="line"><span class="bash">  apk add --no-cache curl &amp;&amp; \</span></span><br><span class="line"><span class="bash">  curl -fsL http://downloads.typesafe.com/scala/<span class="variable">$SCALA_VERSION</span>/scala-<span class="variable">$SCALA_VERSION</span>.tgz | tar xfz - -C /usr/<span class="built_in">local</span> &amp;&amp; \</span></span><br><span class="line"><span class="bash">  ln -s /usr/<span class="built_in">local</span>/scala-<span class="variable">$SCALA_VERSION</span>/bin/* /usr/<span class="built_in">local</span>/bin/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">  scala -version &amp;&amp; \</span></span><br><span class="line"><span class="bash">  scalac -version</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> \</span></span><br><span class="line"><span class="bash">  curl -fsL https://github.com/sbt/sbt/releases/download/v<span class="variable">$SBT_VERSION</span>/sbt-<span class="variable">$SBT_VERSION</span>.tgz | tar xfz - -C /usr/<span class="built_in">local</span> &amp;&amp; \</span></span><br><span class="line"><span class="bash">  $(mv /usr/<span class="built_in">local</span>/sbt-launcher-packaging-<span class="variable">$SBT_VERSION</span> /usr/<span class="built_in">local</span>/sbt || <span class="literal">true</span>) \</span></span><br><span class="line"><span class="bash">  ln -s /usr/<span class="built_in">local</span>/sbt/bin/* /usr/<span class="built_in">local</span>/bin/ &amp;&amp; \</span></span><br><span class="line"><span class="bash">  sbt sbt-version || sbt sbtVersion || <span class="literal">true</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /project</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="string">"/usr/local/bin/sbt"</span></span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意<code>Dockerfile</code>开头的两个参数：<strong>SCALA_VERSION</strong>和<strong>SBT_VERSION</strong>是可以用户指定的。</p>
 </blockquote>
@@ -1155,6 +1155,187 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/集群配置Livy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姜文奇">
+      <meta itemprop="description" content="大数据, 机器学习, 后端, 运维">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vinci's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/集群配置Livy/" class="post-title-link" itemprop="url">集群配置Livy</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-27 23:06:33" itemprop="dateCreated datePublished" datetime="2019-02-27T23:06:33+08:00">2019-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-10 01:09:46" itemprop="dateModified" datetime="2019-04-10T01:09:46+08:00">2019-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="集群配置Livy"><a href="#集群配置Livy" class="headerlink" title="集群配置Livy"></a>集群配置Livy</h1><h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>Livy 官网地址：<code>http://livy.incubator.apache.org/download/</code></p>
+<p>具体指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 进入指定目录</span><br><span class="line">cd /home/admin/soft</span><br><span class="line"><span class="meta">#</span> 下载文件</span><br><span class="line">wget http://mirror.bit.edu.cn/apache/incubator/livy/0.5.0-incubating/livy-0.5.0-incubating-bin.zip</span><br></pre></td></tr></table></figure>
+<h2 id="二、解压"><a href="#二、解压" class="headerlink" title="二、解压"></a>二、解压</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">unzip livy-0.5.0-incubating-bin.zip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名</span></span><br><span class="line">mv livy-0.5.0-incubating-bin livy-0.5.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制到 /etc 目录下</span></span><br><span class="line">cp -r livy-0.5.0 /etc/livy</span><br></pre></td></tr></table></figure>
+<h2 id="三、更改配置文件"><a href="#三、更改配置文件" class="headerlink" title="三、更改配置文件"></a>三、更改配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /etc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 给文件夹赋予权限</span></span><br><span class="line">chmod +777 livy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置文件</span></span><br><span class="line">cd /etc/livy/conf</span><br><span class="line">cp livy-env.sh.template livy-env.sh</span><br><span class="line">vim livy-env.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># - HADOOP_CONF_DIR Directory containing the Hadoop / YARN configuration to use.</span><br><span class="line">HADOOP_CONF_DIR=/etc/hadoop/conf</span><br><span class="line"># - SPARK_HOME      Spark which you would like to use in Livy.</span><br><span class="line">SPARK_HOME=/opt/cloudera/parcels/SPARK2-2.3.0.cloudera4-1.cdh5.13.3.p0.611179/lib/spark2</span><br></pre></td></tr></table></figure>
+<h2 id="四、启动服务"><a href="#四、启动服务" class="headerlink" title="四、启动服务"></a>四、启动服务</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/livy</span><br><span class="line"><span class="meta">#</span><span class="bash"> 新建日志目录，并给权限</span></span><br><span class="line">mkdir logs</span><br><span class="line">chmod +777 logs</span><br><span class="line">./bin/livy-server</span><br></pre></td></tr></table></figure>
+<p>启动成功：</p>
+<img src="/2019/02/集群配置Livy/启动成功.png" title="启动成功">
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">后台模式</span></span><br><span class="line">./bin/livy-server start</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1197,7 +1378,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1239,7 +1420,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
