@@ -92,7 +92,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Docker-Spark-历险记（一）"><a href="#Docker-Spark-历险记（一）" class="headerlink" title="Docker Spark 历险记（一）"></a>Docker Spark 历险记（一）</h1><h2 id="一键在Docker上部署属于你自己的Spark计算平台"><a href="#一键在Docker上部署属于你自己的Spark计算平台" class="headerlink" title="一键在Docker上部署属于你自己的Spark计算平台"></a>一键在Docker上部署属于你自己的Spark计算平台</h2><img src="/2019/04/Docker-Spark-历险记（一）/文章Logo.jpg">
+        <h2 id="一键在Docker上部署属于你自己的Spark计算平台"><a href="#一键在Docker上部署属于你自己的Spark计算平台" class="headerlink" title="一键在Docker上部署属于你自己的Spark计算平台"></a>一键在Docker上部署属于你自己的Spark计算平台</h2><img src="/2019/04/Docker-Spark-历险记（一）/文章Logo.jpg">
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>阅读这篇文章之后，你可以学到什么：<br>简单来说就是，可以通过一个命令启动一个 <code>Spark</code> 集群，然后执行你的计算任务。<br>往复杂了说：</p>
 <h2 id="Docker-相关知识点："><a href="#Docker-相关知识点：" class="headerlink" title="Docker 相关知识点："></a><code>Docker</code> 相关知识点：</h2><ul>
 <li><code>Docker</code> 安装及常见指令；</li>
@@ -174,7 +174,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip `hostname` --port 7077 --webui-port 8080</span><br></pre></td></tr></table></figure>
 <img src="/2019/04/Docker-Spark-历险记（一）/Spark启动成功.png">
 <p>然后可以去浏览器确认<code>Spark</code>是否成功启动：</p>
-<p>![Spark启动成功1 <img src="/2019/04/Docker-Spark-历险记（一）/Spark启动成功1.png"></p>
+<img src="/2019/04/Docker-Spark-历险记（一）/Spark启动成功1.png">
 <hr>
 <h1 id="搭建Spark集群"><a href="#搭建Spark集群" class="headerlink" title="搭建Spark集群"></a>搭建<code>Spark</code>集群</h1><p>以上测试成功之后，退出容器，容器便自动删除了（因为启动容器的时候加了<code>rm</code>选项）。</p>
 <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>找到<code>/etc/sysctl.conf</code></p>
@@ -191,7 +191,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --name spark-worker1 --hostname spark-worker1 \</span><br><span class="line">    --network spark_network \</span><br><span class="line">    <span class="variable">$MYNAME</span>/spark:latest /bin/sh</span><br><span class="line">    </span><br><span class="line">docker run --rm -it --name spark-worker1 --hostname spark-worker1 \</span><br><span class="line">    --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
 <p>进入到<code>worker</code>容器中之后，启动<code>Spark-Worker</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/spark/bin/spark-class org.apache.spark.deploy.worker.Worker \</span><br><span class="line">    --webui-port 8080 spark://spark-master:7077</span><br></pre></td></tr></table></figure>
-<p>![Worker启动成功 <img src="/2019/04/Docker-Spark-历险记（一）/Worker启动成功.png"></p>
+<img src="/2019/04/Docker-Spark-历险记（一）/Worker启动成功.png">
 <blockquote>
 <p>注：此时回看<code>Spark-Master</code>容器，会发现多了一行日志：</p>
 </blockquote>
@@ -235,7 +235,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t vinci/spark:latest .</span><br></pre></td></tr></table></figure>
 <p>编译完成之后进入容器检查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it --network spark_network \</span><br><span class="line">    vinci/spark:latest /bin/sh</span><br></pre></td></tr></table></figure>
-<p>![启动脚本添加到容器里面 <img src="/2019/04/Docker-Spark-历险记（一）/启动脚本添加到容器里面.png"></p>
+<img src="/2019/04/Docker-Spark-历险记（一）/启动脚本添加到容器里面.png">
 <h2 id="编写docker-compose-yml"><a href="#编写docker-compose-yml" class="headerlink" title="编写docker-compose.yml"></a>编写<code>docker-compose.yml</code></h2><p>创建一个新文件：<code>docker-compose.yml</code>，输入以下配置：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  spark-master:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">vinci/spark:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">spark-master</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">spark-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"8080:8080"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"7077:7077"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">spark-network</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_LOCAL_IP=spark-master"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_MASTER_PORT=7077"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_MASTER_WEBUI_PORT=8080"</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">"/start-master.sh"</span></span><br><span class="line"><span class="attr">  spark-worker:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">vinci/spark:latest</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">spark-master</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">spark-network</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_MASTER=spark://spark-master:7077"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"SPARK_WORKER_WEBUI_PORT=8080"</span></span><br><span class="line"><span class="attr">    entrypoint:</span> <span class="string">"/start-worker.sh"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./:/local"</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  spark-network:</span></span><br><span class="line"><span class="attr">    driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">    ipam:</span></span><br><span class="line"><span class="attr">      driver:</span> <span class="string">default</span></span><br></pre></td></tr></table></figure>
 <p>接下来要做的事情就很简单了，直接运行以下命令就行：</p>
@@ -243,7 +243,7 @@
 <p>其中<code>--scale</code>作用是：Sets the number of containers to run for a service.</p>
  
 <p>运行成功之后可以新建一个<code>SSH</code>连接到虚拟机<code>CentOS</code>上，输入<code>docker container ls</code>查看当前正在运行的容器：</p>
-<p>![正在运行的容器 <img src="/2019/04/Docker-Spark-历险记（一）/正在运行的容器.png"></p>
+<img src="/2019/04/Docker-Spark-历险记（一）/正在运行的容器.png">
 <h2 id="测试一下-1"><a href="#测试一下-1" class="headerlink" title="测试一下"></a>测试一下</h2><p>需要注意的是，这里通过<code>docker-compose</code>启动<code>spark</code>集群的方式，<code>net-work</code>的名字叫做：<strong>spark_spark-network</strong></p>
 <img src="/2019/04/Docker-Spark-历险记（一）/docker-network.png">
 <p>启动测试容器：</p>
@@ -256,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/" data-id="cju9yu8ki00006tu9bhl73e9y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/Docker-Spark-历险记（一）/" data-id="cju9yydbq0000a9u9geu1qkad" class="article-share-link">Share</a>
       
       
     </footer>
