@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="官方安装教程：https://www.cloudera.com/documentation/enterprise/5-13-x/topics/installation_installation.html 官网推荐方式官方共给出了3中安装方式：  第一种方法在线安装，不推荐（我自己安装失败了，因为很多网站是被墙，不适合国内大环境）； 第二种方法需要下载很多包； 第三种方法对系统侵入性最小,最大优点可">
+<meta name="keywords" content="Cloudera Manager,Hdoop,CentOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建大数据集群(Cloudera Manager)">
+<meta property="og:url" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/index.html">
+<meta property="og:site_name" content="Vinci&#39;s Blog">
+<meta property="og:description" content="官方安装教程：https://www.cloudera.com/documentation/enterprise/5-13-x/topics/installation_installation.html 官网推荐方式官方共给出了3中安装方式：  第一种方法在线安装，不推荐（我自己安装失败了，因为很多网站是被墙，不适合国内大环境）； 第二种方法需要下载很多包； 第三种方法对系统侵入性最小,最大优点可">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/CM6所有RPM包.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/CM服务数据库.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/CM浏览器登录界面.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/集群添加Slave节点.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/选择存储库.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/JDK安装选项.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/SSH登录凭证.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/服务的数据设置.png">
+<meta property="og:updated_time" content="2019-04-10T04:38:31.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建大数据集群(Cloudera Manager)">
+<meta name="twitter:description" content="官方安装教程：https://www.cloudera.com/documentation/enterprise/5-13-x/topics/installation_installation.html 官网推荐方式官方共给出了3中安装方式：  第一种方法在线安装，不推荐（我自己安装失败了，因为很多网站是被墙，不适合国内大环境）； 第二种方法需要下载很多包； 第三种方法对系统侵入性最小,最大优点可">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/CM6所有RPM包.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>搭建大数据集群(Cloudera Manager) | Vinci's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vinci's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">学习笔记</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jiangwenqi" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/搭建大数据集群-Cloudera-Manager/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姜文奇">
+      <meta itemprop="description" content="大数据, 机器学习, 后端, 运维">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vinci's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">搭建大数据集群(Cloudera Manager)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-12-28 12:25:30" itemprop="dateCreated datePublished" datetime="2018-12-28T12:25:30+08:00">2018-12-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-10 12:38:31" itemprop="dateModified" datetime="2019-04-10T12:38:31+08:00">2019-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Cloudera-Manager/" itemprop="url" rel="index"><span itemprop="name">Cloudera Manager</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>官方安装教程：<a href="https://www.cloudera.com/documentation/enterprise/5-13-x/topics/installation_installation.html" target="_blank" rel="noopener">https://www.cloudera.com/documentation/enterprise/5-13-x/topics/installation_installation.html</a></p>
+<h1 id="官网推荐方式"><a href="#官网推荐方式" class="headerlink" title="官网推荐方式"></a>官网推荐方式</h1><p>官方共给出了3中安装方式：</p>
+<ol>
+<li>第一种方法在线安装，不推荐（我自己安装失败了，因为很多网站是被墙，不适合国内大环境）；</li>
+<li>第二种方法需要下载很多包；</li>
+<li>第三种方法对系统侵入性最小,最大优点可实现全离线安装，而且重装什么的都非常方便。后期的集群统一包升级也非常好。这也是我之所以选择离线安装的原因。</li>
+</ol>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CentOS</td>
+<td>7 64位</td>
+</tr>
+<tr>
+<td>JDK</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>Cloudera Manager</td>
+<td>6.1.0</td>
+</tr>
+</tbody>
+</table>
+<p>本次安装一共使用3台服务器，主要用户测试。</p>
+<table>
+<thead>
+<tr>
+<th>服务名</th>
+<th>内网IP</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>master</td>
+<td>192.168.199.234</td>
+<td>主，按照CM</td>
+</tr>
+<tr>
+<td>slave01</td>
+<td>192.168.199.146</td>
+<td>从</td>
+</tr>
+<tr>
+<td>slave02</td>
+<td>192.168.199.153</td>
+<td>从</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>可以搭建三台虚拟机，其中master内存在8G以上，slave内存在4G以上，每个虚机的硬盘空间100G+</p>
+</blockquote>
+<h1 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h1><h2 id="0-安装必要开发工具（可选）"><a href="#0-安装必要开发工具（可选）" class="headerlink" title="0. 安装必要开发工具（可选）"></a>0. 安装必要开发工具（可选）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新包</span></span><br><span class="line">yum update</span><br><span class="line"><span class="comment"># 必要的网络工具，如：ifconfig</span></span><br><span class="line">yum -y install net-tools</span><br><span class="line"><span class="comment"># 下载工具</span></span><br><span class="line">yum -y install wget</span><br><span class="line"><span class="comment"># Vim</span></span><br><span class="line">yum -y install vim</span><br></pre></td></tr></table></figure>
+<h2 id="1-安装Oracle-JDK"><a href="#1-安装Oracle-JDK" class="headerlink" title="1. 安装Oracle JDK"></a>1. 安装Oracle JDK</h2><h3 id="下载64位JDK"><a href="#下载64位JDK" class="headerlink" title="下载64位JDK"></a>下载64位JDK</h3><p>由于版权原因，Linux发行版并没有包含官方版的Oracle JDK，必须自己从官网上下载安装。</p>
+<p>Oracle官网用Cookie限制下载方式，使得眼下只能用浏览器进行下载，使用其他方式可能会导致下载失败。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载Oracle JDK 1.8</span></span><br><span class="line">wget --no-check-certificate --no-cookies --header <span class="string">"Cookie: oraclelicense=accept-securebackup-cookie"</span> https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>wget：下载方式</li>
+<li>–no-check-certificate：用于禁止检查证书</li>
+<li>–no-cookies：用于禁用Cookies</li>
+<li>–header=header-line：用于定义请求头信息</li>
+<li>http…：即为jdk1.8下载链接</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li><p>解压JDK到指定文件夹<code>/usr/java/jdk-version</code>，如：<code>/usr/java/jdk1.8.0_201</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line">mkdir /usr/java</span><br><span class="line"><span class="comment"># 解压到指定文件夹</span></span><br><span class="line">tar -zxvf jdk-8u201-linux-x64.tar.gz -C /usr/java/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置<code>JAVA_HOME</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line"><span class="comment"># 在文件底部输入</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_201</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置文件生效，并检查安装是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-下载Cloudera-Manager必要软件"><a href="#2-下载Cloudera-Manager必要软件" class="headerlink" title="2. 下载Cloudera Manager必要软件"></a>2. 下载Cloudera Manager必要软件</h2><ul>
+<li><p>创建对应目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/soft/cm6.1.0/RPMS</span><br><span class="line"><span class="built_in">cd</span> ~/soft/cm6.1.0/RPMS</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>登录官方<a href="https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/RPMS/x86_64/" target="_blank" rel="noopener">网站</a>下载所有的<code>RPM</code>包</p>
+  <img src="/2018/12/搭建大数据集群-Cloudera-Manager/CM6所有RPM包.png">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -b https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/RPMS/x86_64/cloudera-manager-agent-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">wget -b https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/RPMS/x86_64/cloudera-manager-daemons-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">wget -b https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/RPMS/x86_64/cloudera-manager-server-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">wget -b https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/RPMS/x86_64/cloudera-manager-server-db-2-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">wget -b https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/RPMS/x86_64/oracle-j2sdk1.8-1.8.0+update141-1.x86_64.rpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载<code>rpm</code>仓库文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/soft/cm6.1.0</span><br><span class="line">wget https://archive.cloudera.com/cm6/6.1.0/redhat7/yum/cloudera-manager.repo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载在线安装文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/soft/cm6.1.0</span><br><span class="line">wget https://archive.cloudera.com/cm6/6.1.0/cloudera-manager-installer.bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载<code>parcel</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/soft/cm6.1.0/parcels</span><br><span class="line"><span class="built_in">cd</span> ~/soft/cm6.1.0/parcels</span><br><span class="line">wget -b https://archive.cloudera.com/cdh6/6.1.0/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel</span><br><span class="line">wget -b https://archive.cloudera.com/cdh6/6.1.0/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel.sha256</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注：下载时间较长，所以采用后台下载。</p>
+<h2 id="3-服务器环境准备"><a href="#3-服务器环境准备" class="headerlink" title="3. 服务器环境准备"></a>3. 服务器环境准备</h2><h3 id="修改-hostname-及-hosts"><a href="#修改-hostname-及-hosts" class="headerlink" title="修改 hostname 及 hosts"></a>修改 hostname 及 hosts</h3><blockquote>
+<p><strong>针对所有节点操作</strong></p>
+</blockquote>
+<p>为了更好地区分服务器和更快捷地操作，修改 hostname 及 hosts。</p>
+<ul>
+<li>node00（主节点）：<code>hostnamectl --static set-hostname master</code></li>
+<li>node01（从节点）：<code>hostnamectl --static set-hostname slave01</code></li>
+<li>node02（从节点）：<code>hostnamectl --static set-hostname slave02</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line"><span class="comment"># 在最后添加</span></span><br><span class="line">192.168.199.234 master</span><br><span class="line">192.168.199.146 slave01</span><br><span class="line">192.168.199.153 slave02</span><br></pre></td></tr></table></figure>
+<p>注：重启生效</p>
+<h3 id="关闭防火墙及selinux"><a href="#关闭防火墙及selinux" class="headerlink" title="关闭防火墙及selinux"></a>关闭防火墙及selinux</h3><blockquote>
+<p><strong>针对所有节点操作</strong></p>
+</blockquote>
+<p>关闭防火墙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service <span class="comment">#停止firewall</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld.service <span class="comment">#禁止firewall开机启动</span></span><br><span class="line">firewall-cmd --state <span class="comment">#查看默认防火墙状态（关闭后显示notrunning，开启后显示running）</span></span><br></pre></td></tr></table></figure>
+<p>关闭selinux：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<p>找到SELINUX改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
+<h3 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a>SSH免密登录</h3><blockquote>
+<p><strong>针对所有节点操作</strong></p>
+</blockquote>
+<ul>
+<li><p>现在 master 上执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#一路回车到完成</span></span><br><span class="line">ssh-keygen -t rsa   </span><br><span class="line"><span class="comment">#将公钥拷贝到本机的authorized_keys上</span></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再在其他节点分别执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#一路回车到完成</span></span><br><span class="line">ssh-keygen -t rsa  </span><br><span class="line"><span class="comment">#注意此处不变，将公钥拷贝到master的authorized_keys上</span></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub root@master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在master上，将authorized_keys分发到其他节点服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/authorized_keys root@slave01:~/.ssh/</span><br><span class="line">scp ~/.ssh/authorized_keys root@slave02:~/.ssh/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="安装ntp时间同步软件"><a href="#安装ntp时间同步软件" class="headerlink" title="安装ntp时间同步软件"></a>安装ntp时间同步软件</h3><blockquote>
+<p><strong>针对所有节点操作</strong></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install ntp -y</span><br><span class="line"><span class="comment"># 开机启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> ntpd</span><br></pre></td></tr></table></figure>
+<p>重启服务器</p>
+<h2 id="4-安装Cloudera-Manager-和-CDH"><a href="#4-安装Cloudera-Manager-和-CDH" class="headerlink" title="4. 安装Cloudera Manager 和 CDH"></a>4. 安装Cloudera Manager 和 CDH</h2><h3 id="准备所需文件"><a href="#准备所需文件" class="headerlink" title="准备所需文件"></a>准备所需文件</h3><blockquote>
+<p><strong>针对所有节点操作</strong></p>
+</blockquote>
+<p>分配主节点和从节点所需要的文件：</p>
+<ul>
+<li><p>主节点（就是之前下载的所有文件）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cloudera-manager-agent-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">cloudera-manager-daemons-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">cloudera-manager-server-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">cloudera-manager-server-db-2-6.1.0-769885.el7.x86_64.rpm</span><br><span class="line">oracle-j2sdk1.8-1.8.0+update141-1.x86_64.rpm</span><br><span class="line">cloudera-manager-installer.bin</span><br><span class="line">cloudera-manager.repo</span><br><span class="line">CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel</span><br><span class="line">CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel.sha256</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从节点需要的文件有三个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在从节点上建立相应目录</span></span><br><span class="line">mkdir -p ~/soft/cm6.1.0/RPMS</span><br><span class="line">mkdir -p ~/soft/cm6.1.0/parcels</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在主节点上执行</span></span><br><span class="line">scp -r ~/soft/cm6.1.0/RPMS/cloudera-manager-agent-6.1.0-769885.el7.x86_64.rpm root@slave01:~/soft/cm6.1.0/RPMS</span><br><span class="line">scp -r ~/soft/cm6.1.0/RPMS/cloudera-manager-daemons-6.1.0-769885.el7.x86_64.rpm root@slave01:~/soft/cm6.1.0/RPMS</span><br><span class="line">scp -r ~/soft/cm6.1.0/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel root@slave01:~/soft/cm6.1.0/parcels</span><br><span class="line">scp -r ~/soft/cm6.1.0/cloudera-manager.repo root@slave01:~/soft/cm6.1.0</span><br><span class="line"></span><br><span class="line">scp -r ~/soft/cm6.1.0/RPMS/cloudera-manager-agent-6.1.0-769885.el7.x86_64.rpm root@slave02:~/soft/cm6.1.0/RPMS</span><br><span class="line">scp -r ~/soft/cm6.1.0/RPMS/cloudera-manager-daemons-6.1.0-769885.el7.x86_64.rpm root@slave02:~/soft/cm6.1.0/RPMS</span><br><span class="line">scp -r ~/soft/cm6.1.0/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel root@slave02:~/soft/cm6.1.0/parcels</span><br><span class="line">scp -r ~/soft/cm6.1.0/cloudera-manager.repo root@slave02:~/soft/cm6.1.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 离线 parcel</span></span><br><span class="line">cp -p ~/soft/cm6.1.0/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel /opt/cloudera/parcel-repo/</span><br><span class="line">cp -p ~/soft/cm6.1.0/parcels/CDH-6.1.0-1.cdh6.1.0.p0.770702-el7.parcel.sha256 /opt/cloudera/parcel-repo/</span><br><span class="line">chown -R cloudera-scm.cloudera-scm /var/lib/cloudera-scm-server</span><br><span class="line">chown cloudera-scm.cloudera-scm  /opt  -R</span><br><span class="line">chown cloudera-scm.cloudera-scm  /var/<span class="built_in">log</span>/cloudera-scm-agent -R</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="配置-Cloudera-Manager-仓库"><a href="#配置-Cloudera-Manager-仓库" class="headerlink" title="配置 Cloudera Manager 仓库"></a>配置 Cloudera Manager 仓库</h3><blockquote>
+<p><strong>对所有节点进行操作</strong></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp ~/soft/cm6.1.0/cloudera-manager.repo -P /etc/yum.repos.d/</span><br><span class="line">rpm --import https://archive.cloudera.com/cdh6/6.1.0/redhat7/yum/RPM-GPG-KEY-cloudera</span><br></pre></td></tr></table></figure>
+<h3 id="安装-RPMS"><a href="#安装-RPMS" class="headerlink" title="安装 RPMS"></a>安装 RPMS</h3><blockquote>
+<p><strong>对所有节点进行操作</strong></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/soft/cm6.1.0/RPMS</span><br><span class="line">yum localinstall --nogpgcheck *.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="安装-CM-Server-和-Agent"><a href="#安装-CM-Server-和-Agent" class="headerlink" title="安装 CM Server 和 Agent"></a>安装 CM Server 和 Agent</h3><ul>
+<li><strong>master:</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cloudera-manager-daemons cloudera-manager-agent cloudera-manager-server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>slave01,slave02:</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cloudera-manager-daemons cloudera-manager-agent</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-配置Cloudera-Manager数据库（MySQL）"><a href="#5-配置Cloudera-Manager数据库（MySQL）" class="headerlink" title="5. 配置Cloudera Manager数据库（MySQL）"></a>5. 配置Cloudera Manager数据库（MySQL）</h2><h3 id="安装MySQL服务"><a href="#安装MySQL服务" class="headerlink" title="安装MySQL服务"></a>安装MySQL服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm</span><br><span class="line">sudo yum update</span><br><span class="line">sudo yum install mysql-server</span><br><span class="line">sudo systemctl start mysqld</span><br></pre></td></tr></table></figure>
+<h3 id="配置和启动MySQL服务"><a href="#配置和启动MySQL服务" class="headerlink" title="配置和启动MySQL服务"></a>配置和启动MySQL服务</h3><ol>
+<li><p>如果MySQL服务正在运行的话，先将其停止：<code>sudo systemctl stop mysqld</code>；</p>
+</li>
+<li><p>删除（或者备份）日志文件<code>/var/lib/mysql/ib_logfile0</code> and<code>/var/lib/mysql/ib_logfile1</code>；</p>
+</li>
+<li><p>修改<code>/etc/my.cnf</code>，Cloudrea 的<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mysql.html#cmig_topic_5_5_2" target="_blank" rel="noopener">推荐配置</a>如下（具体详解参见官方说明）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">transaction-isolation = READ-COMMITTED</span><br><span class="line"># Disabling symbolic-links is recommended to prevent assorted security risks;</span><br><span class="line"># to do so, uncomment this line:</span><br><span class="line">symbolic-links = 0</span><br><span class="line"></span><br><span class="line">key_buffer_size = 32M</span><br><span class="line">max_allowed_packet = 32M</span><br><span class="line">thread_stack = 256K</span><br><span class="line">thread_cache_size = 64</span><br><span class="line">query_cache_limit = 8M</span><br><span class="line">query_cache_size = 64M</span><br><span class="line">query_cache_type = 1</span><br><span class="line"></span><br><span class="line">max_connections = 550</span><br><span class="line">#expire_logs_days = 10</span><br><span class="line">#max_binlog_size = 100M</span><br><span class="line"></span><br><span class="line">#log_bin should be on a disk with enough free space.</span><br><span class="line">#Replace &apos;/var/lib/mysql/mysql_binary_log&apos; with an appropriate path for your</span><br><span class="line">#system and chown the specified folder to the mysql user.</span><br><span class="line">log_bin=/var/lib/mysql/mysql_binary_log</span><br><span class="line"></span><br><span class="line">#In later versions of MySQL, if you enable the binary log and do not set</span><br><span class="line">#a server_id, MySQL will not start. The server_id must be unique within</span><br><span class="line">#the replicating group.</span><br><span class="line">server_id=1</span><br><span class="line"></span><br><span class="line">binlog_format = mixed</span><br><span class="line"></span><br><span class="line">read_buffer_size = 2M</span><br><span class="line">read_rnd_buffer_size = 16M</span><br><span class="line">sort_buffer_size = 8M</span><br><span class="line">join_buffer_size = 8M</span><br><span class="line"></span><br><span class="line"># InnoDB settings</span><br><span class="line">innodb_file_per_table = 1</span><br><span class="line">innodb_flush_log_at_trx_commit  = 2</span><br><span class="line">innodb_log_buffer_size = 64M</span><br><span class="line">innodb_buffer_pool_size = 4G</span><br><span class="line">innodb_thread_concurrency = 8</span><br><span class="line">innodb_flush_method = O_DIRECT</span><br><span class="line">innodb_log_file_size = 512M</span><br><span class="line"></span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/log/mysqld.log</span><br><span class="line">pid-file=/var/run/mysqld/mysqld.pid</span><br><span class="line"></span><br><span class="line">sql_mode=STRICT_ALL_TABLES</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>允许MySQL服务开机自启：<code>sudo systemctl enable mysqld</code>；</p>
+</li>
+<li><p>启动MySQL服务：<code>sudo systemctl start mysqld</code>；</p>
+</li>
+<li><p>修改密码：<code>sudo /usr/bin/mysql_secure_installation</code>； </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[...]</span><br><span class="line">Enter current password <span class="keyword">for</span> root (enter <span class="keyword">for</span> none):</span><br><span class="line">OK, successfully used password, moving on...</span><br><span class="line">[...]</span><br><span class="line">Set root password? [Y/n] Y</span><br><span class="line">New password:</span><br><span class="line">Re-enter new password:</span><br><span class="line">Remove anonymous users? [Y/n] Y</span><br><span class="line">[...]</span><br><span class="line">Disallow root login remotely? [Y/n] N</span><br><span class="line">[...]</span><br><span class="line">Remove <span class="built_in">test</span> database and access to it [Y/n] Y</span><br><span class="line">[...]</span><br><span class="line">Reload privilege tables now? [Y/n] Y</span><br><span class="line">All <span class="keyword">done</span>!</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="安装MySQL-JDB-Driver"><a href="#安装MySQL-JDB-Driver" class="headerlink" title="安装MySQL JDB Driver"></a>安装MySQL JDB Driver</h3><blockquote>
+<p>所有节点</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/soft</span><br><span class="line">wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz</span><br><span class="line"></span><br><span class="line">tar zxvf mysql-connector-java-5.1.46.tar.gz</span><br><span class="line"></span><br><span class="line">mkdir -p /usr/share/java/</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> mysql-connector-java-5.1.46</span><br><span class="line"></span><br><span class="line">cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar</span><br></pre></td></tr></table></figure>
+<h3 id="为Cloudera-软件创建数据库"><a href="#为Cloudera-软件创建数据库" class="headerlink" title="为Cloudera 软件创建数据库"></a>为Cloudera 软件创建数据库</h3><ul>
+<li><p>登录 mysql：<code>mysql -u root -p</code>；</p>
+</li>
+<li><p>为每个服务都创建一个数据库和用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &lt;database&gt; DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line"></span><br><span class="line">GRANT ALL ON &lt;database&gt;.* TO &apos;&lt;user&gt;&apos;@&apos;%&apos; IDENTIFIED BY &apos;&lt;password&gt;&apos;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Database</th>
+<th>User</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cloudera Manager Server</td>
+<td>scm</td>
+<td>scm</td>
+</tr>
+<tr>
+<td>Activity Monitor</td>
+<td>amon</td>
+<td>amon</td>
+</tr>
+<tr>
+<td>Reports Manager</td>
+<td>rman</td>
+<td>rman</td>
+</tr>
+<tr>
+<td>Hue</td>
+<td>hue</td>
+<td>hue</td>
+</tr>
+<tr>
+<td>Hive Metastore Server</td>
+<td>metastore</td>
+<td>hive</td>
+</tr>
+<tr>
+<td>Sentry Server</td>
+<td>sentry</td>
+<td>sentry</td>
+</tr>
+<tr>
+<td>Cloudera Navigator Audit Server</td>
+<td>nav</td>
+<td>nav</td>
+</tr>
+<tr>
+<td>Cloudera Navigator Metadata Server</td>
+<td>navms</td>
+<td>navms</td>
+</tr>
+<tr>
+<td>Oozie</td>
+<td>oozie</td>
+<td>oozie</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># Cloudera Manager Server</span><br><span class="line">CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON scm.* TO &apos;scm&apos;@&apos;%&apos; IDENTIFIED BY &apos;scm000&apos;;</span><br><span class="line"></span><br><span class="line"># Activity Monitor</span><br><span class="line">CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON amon.* TO &apos;amon&apos;@&apos;%&apos; IDENTIFIED BY &apos;amon000&apos;;</span><br><span class="line"></span><br><span class="line"># Reports Manager</span><br><span class="line">CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON rman.* TO &apos;rman&apos;@&apos;%&apos; IDENTIFIED BY &apos;rman000&apos;;</span><br><span class="line"></span><br><span class="line"># Hue</span><br><span class="line">CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON hue.* TO &apos;hue&apos;@&apos;%&apos; IDENTIFIED BY &apos;hue000&apos;;</span><br><span class="line"></span><br><span class="line"># Hive Metastore Server</span><br><span class="line">CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON metastore.* TO &apos;hive&apos;@&apos;%&apos; IDENTIFIED BY &apos;hive000&apos;;</span><br><span class="line"></span><br><span class="line"># Sentry Server</span><br><span class="line">CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON sentry.* TO &apos;sentry&apos;@&apos;%&apos; IDENTIFIED BY &apos;sentry000&apos;;</span><br><span class="line"></span><br><span class="line"># Cloudera Navigator Audit Server</span><br><span class="line">CREATE DATABASE nav DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON nav.* TO &apos;nav&apos;@&apos;%&apos; IDENTIFIED BY &apos;nav000&apos;;</span><br><span class="line"></span><br><span class="line"># Cloudera Navigator Metadata Server</span><br><span class="line">CREATE DATABASE navms DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON navms.* TO &apos;navms&apos;@&apos;%&apos; IDENTIFIED BY &apos;navms000&apos;;</span><br><span class="line"></span><br><span class="line"># Oozie</span><br><span class="line">CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON oozie.* TO &apos;oozie&apos;@&apos;%&apos; IDENTIFIED BY &apos;oozie000&apos;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>检查刚才创建的数据库：<code>SHOW DATABASES;</code></p>
+  <img src="/2018/12/搭建大数据集群-Cloudera-Manager/CM服务数据库.png">
+</li>
+</ul>
+<h3 id="配置Cloudera-Manager数据库"><a href="#配置Cloudera-Manager数据库" class="headerlink" title="配置Cloudera Manager数据库"></a>配置Cloudera Manager数据库</h3><p>运行修改<code>scm_prepare_database.sh</code>，更多配置<a href="https://www.cloudera.com/documentation/enterprise/latest/topics/prepare_cm_database.html#scm_prepare_syntax" target="_blank" rel="noopener">参见</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh &lt;databaseType&gt; &lt;databaseName&gt; &lt;databaseUser&gt;</span><br><span class="line"><span class="comment"># 注意要输入密码，密码是刚才设置的，如：scm000</span></span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql amon amon</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql rman rman</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql hue hue</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql metastore hive</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql sentry sentry</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql nav nav</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql navms navms</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql oozie oozie</span><br></pre></td></tr></table></figure>
+<h2 id="6-启动-Cloudrea-Manger-Server"><a href="#6-启动-Cloudrea-Manger-Server" class="headerlink" title="6. 启动 Cloudrea Manger Server"></a>6. 启动 Cloudrea Manger Server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start cloudera-scm-server</span><br><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">tail -f /var/<span class="built_in">log</span>/cloudera-scm-server/cloudera-scm-server.log</span><br></pre></td></tr></table></figure>
+<p>当你看到下图时，说明启动成功了</p>
+<pre><code>{% asset_img 启动成功.png %}
+</code></pre><p>然后就可以在浏览器中输入：<a href="http://192.168.199.234:7180，看到下图便可以登陆了：" target="_blank" rel="noopener">http://192.168.199.234:7180，看到下图便可以登陆了：</a></p>
+<p><strong>Username:</strong> admin</p>
+<p><strong>Password:</strong> admin</p>
+<img src="/2018/12/搭建大数据集群-Cloudera-Manager/CM浏览器登录界面.png">
+<p>接收许可，选择免费版。</p>
+<h2 id="7-集群配置"><a href="#7-集群配置" class="headerlink" title="7. 集群配置"></a>7. 集群配置</h2><h3 id="添加节点"><a href="#添加节点" class="headerlink" title="添加节点"></a>添加节点</h3><p>登录网页版的管理系统之后，进入欢迎界面。接下来就可以添加主机了，也就是 <code>slave</code> 节点</p>
+<img src="/2018/12/搭建大数据集群-Cloudera-Manager/集群添加Slave节点.png">
+<h3 id="添加存储库"><a href="#添加存储库" class="headerlink" title="添加存储库"></a>添加存储库</h3><p>大体不变，直接继续</p>
+<img src="/2018/12/搭建大数据集群-Cloudera-Manager/选择存储库.png">
+<h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h3><p>因为之前已经装过了，所以<strong>不勾选</strong>。</p>
+<img src="/2018/12/搭建大数据集群-Cloudera-Manager/JDK安装选项.png">
+<h3 id="提供-SSH-登录凭据"><a href="#提供-SSH-登录凭据" class="headerlink" title="提供 SSH 登录凭据"></a>提供 SSH 登录凭据</h3><img src="/2018/12/搭建大数据集群-Cloudera-Manager/SSH登录凭证.png">
+<img src="/2018/12/搭建大数据集群-Cloudera-Manager/服务的数据设置.png">
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="当前受管"><a href="#当前受管" class="headerlink" title="当前受管"></a>当前受管</h2><h3 id="问题原因分析"><a href="#问题原因分析" class="headerlink" title="问题原因分析"></a>问题原因分析</h3><p>假如在安装的时候出现问题，如网络连接中断，机器死机，继续安装的时候可能会出现查询不到机器，并且根据ip搜索机器的时候，出现“当前受管”的状态为“是”，安装失败的机器不能再选择了。</p>
+<h3 id="问题解决方案"><a href="#问题解决方案" class="headerlink" title="问题解决方案"></a>问题解决方案</h3><p>当前受管  </p>
+<p>先停止所有服务。清除数据库。</p>
+<ol>
+<li>删除Agent节点的UUID</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /var/lib/cloudera-scm-agent/*</span><br><span class="line"></span><br><span class="line"><span class="comment"># rm -rf /opt/cm-5.7.1/lib/cloudera-scm-agent/*</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>清空主节点CM数据库</p>
+<p>进入主节点的My<a href="http://www.2cto.com/database/" target="_blank" rel="noopener">sql数据库</a>，然后drop database scm;</p>
+</li>
+<li><p>在主节点上重新初始化CM数据库</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;</span><br><span class="line">GRANT ALL ON scm.* TO &apos;scm&apos;@&apos;%&apos; IDENTIFIED BY &apos;scm000&apos;;</span><br><span class="line">exit;</span><br><span class="line">sudo /opt/cloudera/cm/schema/scm_prepare_database.sh mysql scm scm</span><br><span class="line"># /opt/cm-5.7.1/share/cmf/schema/scm_prepare_database.sh mysql cm -hlocalhost -uroot -p123456 --scm-host localhost scm scm scm</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>集群密码：hadoop</p>
+<p>MySQL密码：mysql000</p>
+</blockquote>
+<h2 id="重启失败节点的agent服务"><a href="#重启失败节点的agent服务" class="headerlink" title="重启失败节点的agent服务"></a>重启失败节点的agent服务</h2><p>删除agent目录下面的cm_guid文件，并重启失败节点的agent服务恢复。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@esgyn001 ~]<span class="comment"># cd /var/lib/cloudera-scm-agent/</span></span><br><span class="line">cm_guid        response.avro  uuid           </span><br><span class="line">[root@esgyn001 cloudera-scm-agent]<span class="comment"># rm -rf cm_guid </span></span><br><span class="line"></span><br><span class="line">[root@esgyn001 cloudera-scm-agent]<span class="comment"># service cloudera-scm-agent restart</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /var/lib/cloudera-scm-agent/</span><br><span class="line"></span><br><span class="line">rm -rf cm_guid </span><br><span class="line"></span><br><span class="line">service cloudera-scm-agent restart</span><br></pre></td></tr></table></figure>
+<h2 id="OOZIE-无法创建表"><a href="#OOZIE-无法创建表" class="headerlink" title="OOZIE 无法创建表"></a>OOZIE 无法创建表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># oozie 无法创建表，只能把所有表全删了算了</span><br><span class="line"></span><br><span class="line">rm /dfs/nn/current/ -rf</span><br><span class="line">rm /dfs/snn/current/ -rf</span><br><span class="line">rm -rf /dfs/dn/current/</span><br><span class="line">rm -rf /var/lib/oozie/*</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cloudera-Manager/" rel="tag"># Cloudera Manager</a>
+          
+            <a href="/tags/Hdoop/" rel="tag"># Hdoop</a>
+          
+            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/集群配置Livy/" rel="prev" title="集群配置Livy">
+                集群配置Livy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">姜文奇</p>
+              <div class="site-description motion-element" itemprop="description">大数据, 机器学习, 后端, 运维</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#官网推荐方式"><span class="nav-number">1.</span> <span class="nav-text">官网推荐方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体步骤"><span class="nav-number">3.</span> <span class="nav-text">具体步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-安装必要开发工具（可选）"><span class="nav-number">3.1.</span> <span class="nav-text">0. 安装必要开发工具（可选）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装Oracle-JDK"><span class="nav-number">3.2.</span> <span class="nav-text">1. 安装Oracle JDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载64位JDK"><span class="nav-number">3.2.1.</span> <span class="nav-text">下载64位JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-下载Cloudera-Manager必要软件"><span class="nav-number">3.3.</span> <span class="nav-text">2. 下载Cloudera Manager必要软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-服务器环境准备"><span class="nav-number">3.4.</span> <span class="nav-text">3. 服务器环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-hostname-及-hosts"><span class="nav-number">3.4.1.</span> <span class="nav-text">修改 hostname 及 hosts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭防火墙及selinux"><span class="nav-number">3.4.2.</span> <span class="nav-text">关闭防火墙及selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSH免密登录"><span class="nav-number">3.4.3.</span> <span class="nav-text">SSH免密登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装ntp时间同步软件"><span class="nav-number">3.4.4.</span> <span class="nav-text">安装ntp时间同步软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-安装Cloudera-Manager-和-CDH"><span class="nav-number">3.5.</span> <span class="nav-text">4. 安装Cloudera Manager 和 CDH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备所需文件"><span class="nav-number">3.5.1.</span> <span class="nav-text">准备所需文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Cloudera-Manager-仓库"><span class="nav-number">3.5.2.</span> <span class="nav-text">配置 Cloudera Manager 仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-RPMS"><span class="nav-number">3.5.3.</span> <span class="nav-text">安装 RPMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-CM-Server-和-Agent"><span class="nav-number">3.5.4.</span> <span class="nav-text">安装 CM Server 和 Agent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-配置Cloudera-Manager数据库（MySQL）"><span class="nav-number">3.6.</span> <span class="nav-text">5. 配置Cloudera Manager数据库（MySQL）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装MySQL服务"><span class="nav-number">3.6.1.</span> <span class="nav-text">安装MySQL服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置和启动MySQL服务"><span class="nav-number">3.6.2.</span> <span class="nav-text">配置和启动MySQL服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装MySQL-JDB-Driver"><span class="nav-number">3.6.3.</span> <span class="nav-text">安装MySQL JDB Driver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为Cloudera-软件创建数据库"><span class="nav-number">3.6.4.</span> <span class="nav-text">为Cloudera 软件创建数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Cloudera-Manager数据库"><span class="nav-number">3.6.5.</span> <span class="nav-text">配置Cloudera Manager数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-启动-Cloudrea-Manger-Server"><span class="nav-number">3.7.</span> <span class="nav-text">6. 启动 Cloudrea Manger Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-集群配置"><span class="nav-number">3.8.</span> <span class="nav-text">7. 集群配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加节点"><span class="nav-number">3.8.1.</span> <span class="nav-text">添加节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加存储库"><span class="nav-number">3.8.2.</span> <span class="nav-text">添加存储库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK安装"><span class="nav-number">3.8.3.</span> <span class="nav-text">JDK安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供-SSH-登录凭据"><span class="nav-number">3.8.4.</span> <span class="nav-text">提供 SSH 登录凭据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见问题"><span class="nav-number">4.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#当前受管"><span class="nav-number">4.1.</span> <span class="nav-text">当前受管</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题原因分析"><span class="nav-number">4.1.1.</span> <span class="nav-text">问题原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题解决方案"><span class="nav-number">4.1.2.</span> <span class="nav-text">问题解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启失败节点的agent服务"><span class="nav-number">4.2.</span> <span class="nav-text">重启失败节点的agent服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OOZIE-无法创建表"><span class="nav-number">4.3.</span> <span class="nav-text">OOZIE 无法创建表</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">姜文奇</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
