@@ -458,19 +458,7 @@
 Docker 部分
 继续学习Docker常用操作，如：映射端口，挂载目录，传送变量等；
 
-继续深入学习Dockerfile，熟悉ARG,ENV,RUN,WORKDIR,CMD等指令；
-
-
-Scala 部分
-Scala基础语法，Scala编写第一个Spark应用程序；
-SBT通过配置清单，打包应用程序。
-
-Spark 部分
-提交编写好的Scala应用程序，--class主类。
-
-配置Scala运行环境安装Spark是用Scala编写的，所以这里我采用Scala语言进行编写程序。
-基于上一篇所提到的openjdk镜像，继续编写Dockerfile：
-## Scala and sbt Dockerfile## https://github.com/spikerlabs/scala-sbt (based on https://github.com/hseeberger/scala-sbt)## Pull base imageFROM  openjdk:8-alpineARG SCALA_VERSIONARG SBT_VERSIONENV SCALA_VERSION $&#123;SCALA_VERSION:-2.12
+继续深入学习Dockerfile，
               ...
             </p>
           <!--noindex-->
@@ -658,25 +646,7 @@ Spark 部分
 Docker 相关知识点：
 Docker 安装及常见指令；
 Dockerfile 构建镜像；
-Docker Compose 一键部署；
-Docker network 环境配置。
-
-Spark 相关知识点：
-Spark 集群安装及配置；
-Spark master 及 worker 启动与协作；
-Spark Job 提交及测试 等等。
-
-
-准备虚拟机
-CentOS-7-x86_64-Minimal-1810.iso
-桥接模式
-
-进入虚拟机之后，查询 ip 地址，需要用到：ipconfig 指令，所以输入如下指令：
-yum install net-tools -y
-然后便可以使用ifconfig指令查询ip地址：ssh root@192.168.199.240
-
-安装 Docker参照：官方文档
-卸载旧版本（可选）sudo yum remove docker \                  docker-client \                  docker-client-latest \                  docker-common \                 
+Docker Co
               ...
             </p>
           <!--noindex-->
@@ -862,15 +832,7 @@ yum install net-tools -y
               参考文章如下：
 https://blog.csdn.net/camel84/article/details/81990383
 https://cloud.tencent.com/developer/article/1078857
-项目地址：https://github.com/JiangWenqi/LivyRESTAPI
-前言
-Livy is an open source REST interface for interacting with Apache Spark from anywhere. It supports executing snippets of code or programs in a Spark context that runs locally or in Apache Hadoop YARN.
-
-Interactive Scala, Python and R shells
-Batch submissions in Scala, Java, Python
-Multiple users can share the same server (impersonation support)
-Can be used for submitting jobs from anywhere with REST
-Does not require any code change
+项目地址：https://github.com/JiangWenqi/
               ...
             </p>
           <!--noindex-->
@@ -1055,10 +1017,7 @@ Does not require any code change
             <p>
               集群配置Livy一、下载Livy 官网地址：http://livy.incubator.apache.org/download/
 具体指令：
-# 进入指定目录cd /home/admin/soft# 下载文件wget http://mirror.bit.edu.cn/apache/incubator/livy/0.5.0-incubating/livy-0.5.0-incubating-bin.zip
-二、解压unzip livy-0.5.0-incubating-bin.zip# 重命名mv livy-0.5.0-incubating-bin livy-0.5.0# 复制到 /etc 目录下cp -r livy-0.5.0 /etc/livy
-三、更改配置文件cd /etc# 给文件夹赋予权限chmod +777 livy# 配置文件cd /etc/livy/confcp livy-env.sh.template livy-env.shvim livy-env.sh
-# - HADOOP_CONF_DIR Directory containing the Hadoop / YARN configuration to use.HADOOP_CONF_DIR=/etc/hadoop/conf# - SPARK_HOME      Spark which you would like 
+# 进入指定目录cd /home/admin/soft# 下载文件wget http://mirror.bit.edu.cn/apache/incubator
               ...
             </p>
           <!--noindex-->
