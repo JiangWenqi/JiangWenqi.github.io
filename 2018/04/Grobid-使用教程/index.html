@@ -103,17 +103,18 @@
 
 
 
-  <meta name="description" content="大数据, 机器学习, 后端, 运维">
-<meta name="keywords" content="Hdoop, Spark ML, Spring Boot, Docker">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vinci&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/12/index.html">
+  <meta name="description" content="简介GROBID是一个强大机器学习库，用于解析和抽取原始文档（如：PDF）的逻辑结构；是我在清华大学知识工程实验室主要研究和使用的工具；也是我本科毕业设计主要的研究内容。  官方文档地址：https://grobid.readthedocs.io/en/latest/Introduction/  在此我简要介绍一下GROBID的功能及特点：  能够从PDF格式的文档中提取和解析出文献头部。这些提取">
+<meta name="keywords" content="Grobid,NLP,CRF,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GROBID 使用教程">
+<meta property="og:url" content="http://yoursite.com/2018/04/Grobid-使用教程/index.html">
 <meta property="og:site_name" content="Vinci&#39;s Blog">
-<meta property="og:description" content="大数据, 机器学习, 后端, 运维">
+<meta property="og:description" content="简介GROBID是一个强大机器学习库，用于解析和抽取原始文档（如：PDF）的逻辑结构；是我在清华大学知识工程实验室主要研究和使用的工具；也是我本科毕业设计主要的研究内容。  官方文档地址：https://grobid.readthedocs.io/en/latest/Introduction/  在此我简要介绍一下GROBID的功能及特点：  能够从PDF格式的文档中提取和解析出文献头部。这些提取">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-10T10:32:58.737Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vinci&#39;s Blog">
-<meta name="twitter:description" content="大数据, 机器学习, 后端, 运维">
+<meta name="twitter:title" content="GROBID 使用教程">
+<meta name="twitter:description" content="简介GROBID是一个强大机器学习库，用于解析和抽取原始文档（如：PDF）的逻辑结构；是我在清华大学知识工程实验室主要研究和使用的工具；也是我本科毕业设计主要的研究内容。  官方文档地址：https://grobid.readthedocs.io/en/latest/Introduction/  在此我简要介绍一下GROBID的功能及特点：  能够从PDF格式的文档中提取和解析出文献头部。这些提取">
 
 
 
@@ -121,7 +122,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/archives/2018/12/">
+  <link rel="canonical" href="http://yoursite.com/2018/04/Grobid-使用教程/">
 
 
 
@@ -131,7 +132,7 @@
   };
 </script>
 
-  <title>归档 | Vinci's Blog</title>
+  <title>GROBID 使用教程 | Vinci's Blog</title>
   
 
 
@@ -179,7 +180,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,7 +273,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -350,101 +351,265 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 7 篇日志。 继续努力。
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/Grobid-使用教程/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姜文奇">
+      <meta itemprop="description" content="大数据, 机器学习, 后端, 运维">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vinci's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2018/12/搭建大数据集群-Cloudera-Manager/" itemprop="url">
-            
-              <span itemprop="name">搭建大数据集群(Cloudera Manager)</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">GROBID 使用教程
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-28T12:25:30+08:00" content="2018-12-28">
-          12-28
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-10 17:29:39" itemprop="dateCreated datePublished" datetime="2018-04-10T17:29:39+08:00">2018-04-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-10 18:32:58" itemprop="dateModified" datetime="2019-04-10T18:32:58+08:00">2019-04-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Grobid/" itemprop="url" rel="index"><span itemprop="name">Grobid</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>GROBID</code>是一个强大机器学习库，用于<strong>解析</strong>和<strong>抽取</strong>原始文档（如：PDF）的逻辑结构；是我在清华大学<code>知识工程实验室</code>主要研究和使用的工具；也是我本科<code>毕业设计</code>主要的研究内容。</p>
+<blockquote>
+<p>官方文档地址：<a href="https://grobid.readthedocs.io/en/latest/Introduction/" target="_blank" rel="noopener">https://grobid.readthedocs.io/en/latest/Introduction/</a></p>
+</blockquote>
+<p>在此我简要介绍一下<code>GROBID</code>的功能及特点：</p>
+<ol>
+<li>能够从<code>PDF</code>格式的文档中提取和解析出文献<code>头部</code>。这些提取出来的信息包含了文献详细信息，例如：标题、摘要、作者、单位、关键字等；</li>
+<li>能够从<code>PDF</code>格式的文档中提取和解析出<code>参考引用</code>。支持从脚注里提取参考资料。这些信息在技术和科学文章中很少见，但在人文和社会科学的出版物中却很常见；</li>
+<li>能够单独解析文章<code>引用</code>信息；<ol start="4">
+<li>能够在<code>专利出版物</code>中提取专利和非专利参考文献；</li>
+<li>能够解析出<code>名称</code>，尤其是<code>标题</code>中的作者姓名和<code>引用</code>中的作者姓名（两个不同的模型）；</li>
+<li>能够解析隶属关系和地址块；</li>
+<li>能够解析日期；</li>
+<li>能够从PDF文章中提取全文，包括整个文档分段的模型和文本主体结构的模型。</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	<div>
+      
+		
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/04/Grobid-使用教程/">GROBID 使用教程</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 姜文奇 的个人博客">姜文奇</a></p>
+  <p><span>发布时间:</span>2018年04月10日 - 17:29</p>
+  <p><span>最后更新:</span>2019年04月10日 - 18:32</p>
+  <p><span>原始链接:</span><a href="/2018/04/Grobid-使用教程/" title="GROBID 使用教程">http://yoursite.com/2018/04/Grobid-使用教程/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/04/Grobid-使用教程/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
 
 
       
+	</div>
+    
 
-    </div>
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Grobid/" rel="tag"># Grobid</a>
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/CRF/" rel="tag"># CRF</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/搭建大数据集群-Cloudera-Manager/" rel="prev" title="搭建大数据集群(Cloudera Manager)">
+                搭建大数据集群(Cloudera Manager) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -464,8 +629,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -579,6 +753,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -716,6 +907,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
 
   
 
@@ -734,6 +929,8 @@
 
   
 
+
+  
 
 
   

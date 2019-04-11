@@ -8,9 +8,9 @@
         <category>Spark</category>
       </categories>
       <tags>
+        <tag>Docker</tag>
         <tag>Spark</tag>
         <tag>Scala</tag>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
@@ -21,8 +21,8 @@
         <category>Docker</category>
       </categories>
       <tags>
-        <tag>Spark</tag>
         <tag>Docker</tag>
+        <tag>Spark</tag>
       </tags>
   </entry>
   <entry>
@@ -33,10 +33,25 @@
         <category>Spark</category>
       </categories>
       <tags>
-        <tag>Livy</tag>
-        <tag>Spark</tag>
         <tag>Hadoop</tag>
+        <tag>Spark</tag>
         <tag>Java</tag>
+        <tag>Livy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Launching Hadoop Applications Using Docker Containers]]></title>
+    <url>%2F2019%2F03%2FLaunching-Hadoop-Applications-Using-Docker-Containers%2F</url>
+    <content type="text"><![CDATA[在Docker上运行Hadoop应用程序]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>Hadoop</tag>
+        <tag>Spark</tag>
+        <tag>Cluster</tag>
+        <tag>MapReduce</tag>
       </tags>
   </entry>
   <entry>
@@ -47,9 +62,9 @@
         <category>Spark</category>
       </categories>
       <tags>
-        <tag>Livy</tag>
-        <tag>Spark</tag>
         <tag>Hadoop</tag>
+        <tag>Spark</tag>
+        <tag>Livy</tag>
         <tag>Cloudera Manager</tag>
       </tags>
   </entry>
@@ -64,6 +79,20 @@
         <tag>Cloudera Manager</tag>
         <tag>Hdoop</tag>
         <tag>CentOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[GROBID 使用教程]]></title>
+    <url>%2F2018%2F04%2FGrobid-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[简介GROBID是一个强大机器学习库，用于解析和抽取原始文档（如：PDF）的逻辑结构；是我在清华大学知识工程实验室主要研究和使用的工具；也是我本科毕业设计主要的研究内容。 官方文档地址：https://grobid.readthedocs.io/en/latest/Introduction/ 在此我简要介绍一下GROBID的功能及特点： 能够从PDF格式的文档中提取和解析出文献头部。这些提取出来的信息包含了文献详细信息，例如：标题、摘要、作者、单位、关键字等； 能够从PDF格式的文档中提取和解析出参考引用。支持从脚注里提取参考资料。这些信息在技术和科学文章中很少见，但在人文和社会科学的出版物中却很常见； 能够单独解析文章引用信息； 能够在专利出版物中提取专利和非专利参考文献； 能够解析出名称，尤其是标题中的作者姓名和引用中的作者姓名（两个不同的模型）； 能够解析隶属关系和地址块； 能够解析日期； 能够从PDF文章中提取全文，包括整个文档分段的模型和文本主体结构的模型。]]></content>
+      <categories>
+        <category>Grobid</category>
+      </categories>
+      <tags>
+        <tag>Grobid</tag>
+        <tag>NLP</tag>
+        <tag>CRF</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
