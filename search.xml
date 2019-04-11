@@ -3,7 +3,16 @@
   <entry>
     <title><![CDATA[集群配置Kubernetes（一）]]></title>
     <url>%2F2019%2F04%2F%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AEKubernetes%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[安装Kubeadm原文详见：https://kubernetes.io/docs/setup/independent/install-kubeadm/ 准备工作 三台以上虚拟机：CentOS 7； 每台虚拟机分配2 GB以上的RAM； 每台虚拟机分配2 CPUs，或者更多； 集群之间的机器能够相互通信； 每个节点有单独的hostname，MAC address 和product_uuid； 端口开放； 关闭Swap。]]></content>
+      <categories>
+        <category>Kubernetes</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>Kubeadm</tag>
+        <tag>Kubelet</tag>
+        <tag>Kubectl</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[如何在Kubernetes上启用大数据]]></title>
