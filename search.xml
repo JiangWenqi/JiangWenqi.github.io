@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[集群配置Kubernetes（一）]]></title>
-    <url>%2F2019%2F04%2F%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AEKubernetes%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[安装Kubeadm原文详见：https://kubernetes.io/docs/setup/independent/install-kubeadm/ 准备工作 三台以上虚拟机：CentOS 7； 每台虚拟机分配2 GB以上的RAM； 每台虚拟机分配2 CPUs，或者更多； 集群之间的机器能够相互通信； 每个节点有单独的hostname，MAC address 和product_uuid； 端口开放； 关闭Swap。]]></content>
-      <categories>
-        <category>Kubernetes</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
-        <tag>Kubeadm</tag>
-        <tag>Kubelet</tag>
-        <tag>Kubectl</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[如何在Kubernetes上启用大数据]]></title>
     <url>%2F2019%2F03%2F%E5%A6%82%E4%BD%95%E5%9C%A8Kubernetes%E4%B8%8A%E5%90%AF%E7%94%A8%E5%A4%A7%E6%95%B0%E6%8D%AE%2F</url>
     <content type="text"><![CDATA[原文地址：https://www.xenonstack.com/insights/big-data-on-kubernetes/ 什么是Apache Hadoop在Kubernetes上启用大数据是平滑数据转换的一种很好的做法。Apache Hadoop是一个框架，允许以分布式模式存储大数据，并在大型数据集上进行分布式处理。它的设计使其可以从单个服务器扩展到数千个服务器。 Hadoop本身旨在检测应用程序层的故障并处理该故障。 Hadoop 3.0是继Hadoop 2之后的主要版本，具有HDFS擦除编码等新功能，提高了性能和可扩展性，多个NameNode等等。 大数据如何在Kubernetes上运作？ 在服务中封装Namenode；Kubernetes pod使用服务资源； Kubernetes服务基本上在群集中提供IP/hostname，用来负载平衡所选容器中的传入请求； pod为NameNode pod提供了一个标签，称为App-namenode并创建服务，即带有该标签的指定pod； 通过有状态集识别数据节点：诸如Kubernetes之类的有状态应用程序提供另一种称为有状态集的资源来帮助这些应用程序； 在有状态集中，每个pod都由其名称，存储和主机名标识； 在单个节点上运行完全分布式HDFS ：在Kubernetes世界中，分布式是以容器为级别的。如果多个节点管理专用磁盘，则在单个节点上运行它的分布式。现在，完全分布式HDFS在一台机器上运行。 大数据在Kubernetes运行的好处 支持多个备用NameNode； 支持多个名称空间的多个NameNode； 存储开销从200％降低到50％； 支持GPU； 节点内磁盘平衡； 支持机会容器和分布式调度； 支持Microsoft Azure Data Lake和Aliyun对象存储系统文件系统连接器。 为什么在Kubernetes运行大数据很重要？ Hadoop 3.0的最低运行时版本是JDK 8。 支持HDFS中的Ensure Coding。 Hadoop Shell脚本重写。 MapReduce任务级别原生优化。 在Hadoop 3.0中引入更强大的YARN。 敏捷性和上市时间。 总拥有成本。 可扩展性和可用性。 如何在Kubernetes上采用大数据？将应用程序部署到Kubernetes 创建一个Dockerfile。 设置群集。 连接到群集。 添加群集和登录Docker注册表。 部署Docker镜像。 构建和部署映像。 拉secret。 镜像名称及注册。 要使用的端口。 将私有映像部署到Kubernetes。 自动化流程部署到Kubernetes。 一些基本的Kubernetes术语 Cluster Node Namespace Deployment Pod Container Service Kubernetes大数据的实践建议 镜像尽可能的小：在开始四处寻找基本镜像之前。一个应用程序需要不超过15MB的大小，使用600MB的镜像是浪费资源。当使用较小的镜像时，使用较小的空间可以更快地构建容器。 使用单个镜像 ：Pod很只运行一个Container是很轻松的。这样可以使得Pod性能更好。当Pods中运行多个Container时，连接，管理和保护微服务是一团糟，因为这些会中断所有通信。 仔细检查基本镜像：许多人在选择镜像时会出错。一切都取决于基本镜像。 Docker Hub上有很多镜像，根据Project的要求选择镜像。在使用基本映像构建Docker映像之前，请仔细检查基本映像。 使用命名空间和标签：在部署映像期间正确定义命名空间和标签。在Kube-cluster内部，有一个名为Namespace的虚拟集群彼此隔离。要选择对象的子集，请使用标签。 在容器内使用非root用户：由于安全原因，始终更倾向在容器内使用非Root用户。非Root用户可以事先配置好该容器的权限。 服务和Pod：服务负责使Pods在网络内可被发现或将其暴露在互联网上。 Pod托管多个容器和存储卷。 熟悉Kube组件 ：用于增强安装程序的性能，安全性和可靠性的多组件。 在服务中封装Namenode。 通过有状态集识别数据节点。 在单个节点上运行完全分布式HDFS。 用于在Kubernetes上启用大数据的工具 Docker kubectl]]></content>
