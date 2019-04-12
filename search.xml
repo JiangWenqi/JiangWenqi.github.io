@@ -49,9 +49,9 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Livy</tag>
-        <tag>Spark</tag>
         <tag>Hadoop</tag>
+        <tag>Spark</tag>
+        <tag>Livy</tag>
       </tags>
   </entry>
   <entry>
@@ -62,9 +62,9 @@
         <category>Spark</category>
       </categories>
       <tags>
-        <tag>Livy</tag>
-        <tag>Spark</tag>
         <tag>Hadoop</tag>
+        <tag>Spark</tag>
+        <tag>Livy</tag>
         <tag>Cloudera Manager</tag>
       </tags>
   </entry>
@@ -89,10 +89,10 @@
         <category>Grobid</category>
       </categories>
       <tags>
+        <tag>Java</tag>
         <tag>Grobid</tag>
         <tag>NLP</tag>
         <tag>CRF</tag>
-        <tag>Java</tag>
       </tags>
   </entry>
 </search>
