@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[虚拟机Hadoop集群环境搭建]]></title>
+    <url>%2F2019%2F04%2F%E8%99%9A%E6%8B%9F%E6%9C%BAHadoop%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[准备网卡指定 IP 地址 12345678vi /etc/sysconfig/network-scripts/ifcfg-eth0BOOTPROTO="static"GATEWAY="192.168.199.1"DNS1="192.168.199.1"IPADDR="192.168.199.240" 然后重启网卡：service network restart 配置 host123456vim /etc/hosts192.168.199.240 node0192.168.199.241 node1192.168.199.242 node2192.168.199.243 node3 关闭防火墙停止firewall 1systemctl stop firewalld.service1 禁止firewall开机启动 1systemctl disable firewalld.service 新增用户 新增用户 12adduser vincipasswd vinci 配置用户具有root权限 修改/etc/sudoers文件，找到下面一行，在root下面添加一行，如下所示： 1234567[root@hadoop101 atguigu]# vi /etc/sudoers# Allow root to run any commands anywhereroot ALL=(ALL) ALLvinci ALL=(ALL) ALL 修改完毕，现在可以用vinci帐号登录，然后用命令 su - ，即可获得root权限进行操作。 添加文件夹123cd /optmkdir module softwarechown vinci:vinci module software 安装 JDK 卸载现有 JDK （1）查询是否安装java软件：rpm -qa|grep java （2）如果安装的版本低于1.7，卸载该jdk：rpm -e 软件包 导入 JDK：/opt/software 解压 JDK：tar -zxvf /opt/software/jdk-8u144-linux-x64.tar.gz -C /opt/module/ 配置 JDK 环境变量 JDK 路径：/opt/module/jdk1.8.0_144 编辑/etc/profile：在末尾增加 123# JAVA_HOMEexport JAVA_HOME=/opt/module/jdk1.8.0_144export PATH=$PATH:$JAVA_HOME/bin 刷新：source /etc/profile 验证：java -version 安装 Hadoop 解压：tar -zxf /opt/software/hadoop-2.7.2.tar.gz -C /opt/module/ 配置hadoop-env.sh：(可选，因为已经配置了JAVA_HOME的环境变量) Linux系统中获取jdk的安装路径：echo $JAVA_HOME /opt/module/jdk1.8.0_144 修改hadoop-env.sh文件中JAVA_HOME 路径： vim /opt/module/hadoop-2.7.2/etc/hadoop/hadoop-env.sh。修改JAVA_HOME如下 export JAVA_HOME=/opt/module/jdk1.8.0_144 Hadoop 环境变量 编辑profile：vim /etc/profile，增加 1234# HADOOP_HOMEexport HADOOP_HOME=/opt/module/hadoop-2.7.2export PATH=$PATH:$HADOOP_HOME/binexport PATH=$PATH:$HADOOP_HOME/sbin 刷新：source /etc/profile 验证：hadoop version 伪分布式部署配置 core-site.xml1vim /opt/module/hadoop-2.7.2/etc/hadoop/core-site.xml 在configuration里面添加 1234567891011&lt;!-- 指定HDFS中NameNode的地址 --&gt;&lt;property&gt; &lt;name&gt;fs.defaultFS&lt;/name&gt; &lt;value&gt;hdfs://node0:9000&lt;/value&gt;&lt;/property&gt;&lt;!-- 指定hadoop运行时产生文件的存储目录 --&gt;&lt;property&gt; &lt;name&gt;hadoop.tmp.dir&lt;/name&gt; &lt;value&gt;/opt/module/hadoop-2.7.2/data/tmp&lt;/value&gt;&lt;/property&gt; 配置 hdfs-site.xml1vim /opt/module/hadoop-2.7.2/etc/hadoop/hdfs-site.xml 在configuration里面添加 12345&lt;!-- 指定HDFS副本的数量 --&gt;&lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; &lt;value&gt;1&lt;/value&gt;&lt;/property&gt; 启动集群 格式化 namenode：hdfs namenode -format 启动namenode：hadoop-daemon.sh start namenode 启动datanode：hadoop-daemon.sh start datanode 查看集群 查看集群是否启动成功：jps 1234[root@localhost hadoop]# jps16722 Jps16539 NameNode16639 DataNode 查看日志：cd /opt/module/hadoop-2.7.2/logs 123456total 60-rw-r--r--. 1 root root 23846 Apr 14 22:11 hadoop-vinci-datanode-localhost.localdomain.log-rw-r--r--. 1 root root 715 Apr 14 22:11 hadoop-vinci-datanode-localhost.localdomain.out-rw-r--r--. 1 root root 27583 Apr 14 22:11 hadoop-vinci-namenode-localhost.localdomain.log-rw-r--r--. 1 root root 715 Apr 14 22:11 hadoop-vinci-namenode-localhost.localdomain.out-rw-r--r--. 1 root root 0 Apr 14 22:11 SecurityAuth-root.audit 浏览器查看HDFS系统：http://192.168.199.240:50070/dfshealth.html#tab-overview 操作 HDFS123hdfs dfs -mkdir -p /usr/vinci/inputhdfs dfs -put ~/input/test.input /usr/vinci/inputhdfs dfs -ls /usr/vinci/input 测试 MapReduce1hadoop jar /opt/module/hadoop-2.7.2/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar wordcount /usr/vinci/input/test.input /usr/vinci/output 在YARN上运行MapReduce程序配置 yarn-env.sh (可选)123vim /opt/module/hadoop-2.7.2/etc/hadoop/yarn-env.shexport JAVA_HOME=/opt/module/jdk1.8.0_144 配置 yarn-site.xml1vim /opt/module/hadoop-2.7.2/etc/hadoop/yarn-site.xml 添加 1234567891011121314151617181920212223&lt;!-- reducer获取数据的方式 --&gt;&lt;property&gt; &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt; &lt;value&gt;mapreduce_shuffle&lt;/value&gt;&lt;/property&gt;&lt;!-- 指定YARN的ResourceManager的地址 --&gt;&lt;property&gt; &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt; &lt;value&gt;node0&lt;/value&gt;&lt;/property&gt;&lt;!-- 日志聚集功能使能 --&gt;&lt;property&gt; &lt;name&gt;yarn.log-aggregation-enable&lt;/name&gt; &lt;value&gt;true&lt;/value&gt;&lt;/property&gt;&lt;!-- 日志保留时间设置7天 --&gt;&lt;property&gt; &lt;name&gt;yarn.log-aggregation.retain-seconds&lt;/name&gt; &lt;value&gt;604800&lt;/value&gt;&lt;/property&gt; 配置 mapred-site.xml123cd /opt/module/hadoop-2.7.2/etc/hadoopcp mapred-site.xml.template mapred-site.xmlvim mapred-site.xml 添加 1234567891011121314&lt;!-- 指定mr运行在yarn上 --&gt;&lt;property&gt; &lt;name&gt;mapreduce.framework.name&lt;/name&gt; &lt;value&gt;yarn&lt;/value&gt;&lt;/property&gt;&lt;!-- 历史服务器配置 --&gt;&lt;property&gt; &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt; &lt;value&gt;node0:10020&lt;/value&gt;&lt;/property&gt;&lt;property&gt; &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt; &lt;value&gt;node0:19888&lt;/value&gt;&lt;/property&gt; 启动123yarn-daemon.sh start resourcemanageryarn-daemon.sh start nodemanagermr-jobhistory-daemon.sh start historyserver 浏览器查看：http://192.168.199.240:8088/cluster 运行程序1234# 删除之前的结果hdfs dfs -rm -R /usr/vinci/output# 运行hadoop jar /opt/module/hadoop-2.7.2/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar wordcount /usr/vinci/input/test.input /usr/vinci/output 完全分布式部署免密登录12345678910cd ~/.sshssh-keygen -t rsa# 公钥分发ssh-copy-id node0ssh-copy-id node1ssh-copy-id node2ssh-copy-id node3 工具安装1yum install -y rsync rsync远程同步工具，主要用于备份和镜像。具有速度快、避免复制相同内容和支持符号链接的优点。 rsync和scp区别：用rsync做文件的复制要比scp的速度快，rsync只对差异文件做更新。scp是把所有文件都复制过去。 查看rsync使用说明：man rsync | more 基本语法 12rsync -rvl $pdir/$fname $user@hadoop$host:$pdir命令 命令参数 要拷贝的文件路径/名称 目的用户@主机:目的路径 ​ 选项： ​ -r 递归 ​ -v 显示复制过程 ​ -l 拷贝符号连接 案例实操：把本机/opt/tmp目录同步到node3服务器的root用户下的/opt/tmp目录： rsync -rvl /opt/tmp root@node3:/opt/ 脚本编写编写集群分发脚本xsync12345678910111213141516171819202122232425262728vim /usr/local/bin/xsync#!/bin/bash#1 获取输入参数个数，如果没有参数，直接退出pcount=$#if((pcount==0)); thenecho no args;exit;fi#2 获取文件名称p1=$1fname=`basename $p1`echo fname=$fname#3 获取上级目录到绝对路径pdir=`cd -P $(dirname $p1); pwd`echo pdir=$pdir#4 获取当前用户名称user=`whoami`#5 循环 (node0~node3)for((host=0; host&lt;4; host++)); do #echo $pdir/$fname $user@hadoop$host:$pdir echo --------------- node$host ---------------- rsync -rvl $pdir/$fname $user@node$host:$pdirdone 权限：chmod 777 /usr/local/bin/xsync 用户：chown vinci:vinci -R /usr/local/bin/xsync 示例：xsync temp/ 编写集群操作脚本xcall (可选，有点问题)123456789101112131415vim /usr/local/bin/xcall#!/bin/bashpcount=$#if((pcount==0));then echo no args; exit;fiecho -------------localhost----------$@for((host=0; host&lt;4; host++)); do echo ----------node$host--------- ssh node$host $@done 权限：chmod 777 /usr/local/bin/xcall 用户：chown vinci:vinci -R /usr/local/bin/xcall 示例：xcall rm -rf /opt/temp 集群部署规划 node0 node1 node2 Node3 HDFS NameNode；DataNode SecondaryNameNode；DataNode DataNode DataNode YARN NodeManager NodeManager ResourceManger；NodeManager NodeManager 配置 hdfs-site.xml1234567891011&lt;configuration&gt; &lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; &lt;value&gt;3&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt; &lt;value&gt;node1:50090&lt;/value&gt; &lt;/property&gt;&lt;/configuration&gt;]]></content>
+      <categories>
+        <category>Hadoop</category>
+      </categories>
+      <tags>
+        <tag>Hadoop</tag>
+        <tag>CentOS</tag>
+        <tag>Environment</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[如何在Kubernetes上启用大数据]]></title>
     <url>%2F2019%2F03%2F%E5%A6%82%E4%BD%95%E5%9C%A8Kubernetes%E4%B8%8A%E5%90%AF%E7%94%A8%E5%A4%A7%E6%95%B0%E6%8D%AE%2F</url>
     <content type="text"><![CDATA[原文地址：https://www.xenonstack.com/insights/big-data-on-kubernetes/ 什么是Apache Hadoop在Kubernetes上启用大数据是平滑数据转换的一种很好的做法。Apache Hadoop是一个框架，允许以分布式模式存储大数据，并在大型数据集上进行分布式处理。它的设计使其可以从单个服务器扩展到数千个服务器。 Hadoop本身旨在检测应用程序层的故障并处理该故障。 Hadoop 3.0是继Hadoop 2之后的主要版本，具有HDFS擦除编码等新功能，提高了性能和可扩展性，多个NameNode等等。 大数据如何在Kubernetes上运作？ 在服务中封装Namenode；Kubernetes pod使用服务资源； Kubernetes服务基本上在群集中提供IP/hostname，用来负载平衡所选容器中的传入请求； pod为NameNode pod提供了一个标签，称为App-namenode并创建服务，即带有该标签的指定pod； 通过有状态集识别数据节点：诸如Kubernetes之类的有状态应用程序提供另一种称为有状态集的资源来帮助这些应用程序； 在有状态集中，每个pod都由其名称，存储和主机名标识； 在单个节点上运行完全分布式HDFS ：在Kubernetes世界中，分布式是以容器为级别的。如果多个节点管理专用磁盘，则在单个节点上运行它的分布式。现在，完全分布式HDFS在一台机器上运行。 大数据在Kubernetes运行的好处 支持多个备用NameNode； 支持多个名称空间的多个NameNode； 存储开销从200％降低到50％； 支持GPU； 节点内磁盘平衡； 支持机会容器和分布式调度； 支持Microsoft Azure Data Lake和Aliyun对象存储系统文件系统连接器。 为什么在Kubernetes运行大数据很重要？ Hadoop 3.0的最低运行时版本是JDK 8。 支持HDFS中的Ensure Coding。 Hadoop Shell脚本重写。 MapReduce任务级别原生优化。 在Hadoop 3.0中引入更强大的YARN。 敏捷性和上市时间。 总拥有成本。 可扩展性和可用性。 如何在Kubernetes上采用大数据？将应用程序部署到Kubernetes 创建一个Dockerfile。 设置群集。 连接到群集。 添加群集和登录Docker注册表。 部署Docker镜像。 构建和部署映像。 拉secret。 镜像名称及注册。 要使用的端口。 将私有映像部署到Kubernetes。 自动化流程部署到Kubernetes。 一些基本的Kubernetes术语 Cluster Node Namespace Deployment Pod Container Service Kubernetes大数据的实践建议 镜像尽可能的小：在开始四处寻找基本镜像之前。一个应用程序需要不超过15MB的大小，使用600MB的镜像是浪费资源。当使用较小的镜像时，使用较小的空间可以更快地构建容器。 使用单个镜像 ：Pod很只运行一个Container是很轻松的。这样可以使得Pod性能更好。当Pods中运行多个Container时，连接，管理和保护微服务是一团糟，因为这些会中断所有通信。 仔细检查基本镜像：许多人在选择镜像时会出错。一切都取决于基本镜像。 Docker Hub上有很多镜像，根据Project的要求选择镜像。在使用基本映像构建Docker映像之前，请仔细检查基本映像。 使用命名空间和标签：在部署映像期间正确定义命名空间和标签。在Kube-cluster内部，有一个名为Namespace的虚拟集群彼此隔离。要选择对象的子集，请使用标签。 在容器内使用非root用户：由于安全原因，始终更倾向在容器内使用非Root用户。非Root用户可以事先配置好该容器的权限。 服务和Pod：服务负责使Pods在网络内可被发现或将其暴露在互联网上。 Pod托管多个容器和存储卷。 熟悉Kube组件 ：用于增强安装程序的性能，安全性和可靠性的多组件。 在服务中封装Namenode。 通过有状态集识别数据节点。 在单个节点上运行完全分布式HDFS。 用于在Kubernetes上启用大数据的工具 Docker kubectl]]></content>
@@ -49,9 +62,9 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Hadoop</tag>
-        <tag>Spark</tag>
         <tag>Livy</tag>
+        <tag>Spark</tag>
+        <tag>Hadoop</tag>
       </tags>
   </entry>
   <entry>
@@ -62,9 +75,9 @@
         <category>Spark</category>
       </categories>
       <tags>
-        <tag>Hadoop</tag>
-        <tag>Spark</tag>
         <tag>Livy</tag>
+        <tag>Spark</tag>
+        <tag>Hadoop</tag>
         <tag>Cloudera Manager</tag>
       </tags>
   </entry>
@@ -77,8 +90,8 @@
       </categories>
       <tags>
         <tag>Cloudera Manager</tag>
-        <tag>Hdoop</tag>
         <tag>CentOS</tag>
+        <tag>Hdoop</tag>
       </tags>
   </entry>
   <entry>
@@ -89,10 +102,10 @@
         <category>Grobid</category>
       </categories>
       <tags>
-        <tag>Java</tag>
         <tag>Grobid</tag>
         <tag>NLP</tag>
         <tag>CRF</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
